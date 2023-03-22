@@ -1,6 +1,6 @@
-# From Source to Sink
+# Team Name
 
-### Mallory Johnson, Drew ten Bensel, Alex Larson, Michael Imhoff
+### Team Members
 
 ### Final Proposal
 1. Persona/Scenario
