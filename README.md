@@ -1,4 +1,4 @@
-# From Source to Sink: Following the Flow from Origin to Faucet
+# From Source to Sink: Following the Flow of Water from Origin to Faucet
 
 ### Team Members
 
