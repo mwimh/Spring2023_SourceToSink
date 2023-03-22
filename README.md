@@ -2,10 +2,10 @@
 
 ### Team Members
 
-Mallory Johnson
-Drew ten Bensel
-Alex Larson
-Michael Imhoff
+* Mallory Johnson
+* Drew ten Bensel
+* Alex Larson
+* Michael Imhoff
 
 ### Final Proposal
 1. Persona/Scenario
