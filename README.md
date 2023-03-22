@@ -1,8 +1,10 @@
-# Team Name
+# From Source to Sink
 
 ### Team Members
 
-
+1. Mallory Johnson
+2. Drew ten Bensel
+3. Alex Larson
 4. Michael Imhoff
 
 ### Final Proposal
