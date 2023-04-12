@@ -57,7 +57,7 @@
 
     - Available in the 'img' folder
 
-![Opening Page Wireframe]([/path/to/image.png](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/1.FirstLook.jpg) "Opening Page")
+![Opening Page Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/1.FirstLook.jpg "Opening Page")
 
 
 
