@@ -33,6 +33,8 @@
         - **Municipal Boundaries**- outlines of major municipal areas- LTSB gis portal
 
         - **Municipal “Utilities”**- point data showing municipal wells, linked to boundaries- public service commission (WI)
+        
+        - **Continental Divide Line**- Line showing the divide of water flowing to Lake Michigan or the Missouri River
 
         - **Legend**- legend showing which objects are represented by what color
 
