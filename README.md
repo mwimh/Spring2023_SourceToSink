@@ -20,6 +20,39 @@
         - Scenario 2: The user is a resident of Madison within city limits and on municipal water. Upon entering the page they enter their home address into the location search. A geocoder will link their address to a location within the city of Madison and display the municipal wells linked to the Madison municipal water system (and subsequently retrieve watershed info for that location). They would also be able to input a relative’s address who has a private well (independent of municipal system) and identify and delineate the watershed/aquifers of interest.
 
 2. Requirements Document
+    - **Representations**
+        - **Basemap**- us map/nation map w/ state boundaries, needs to have Wisconsin be main subject- nat earth/widnr
+
+        - **Surface Watersheds**- HUC 8, 10, and 12 watershed boundaries and the areas they cover- widnr gis portal
+
+        - **Surface water**- river lines and lake polygons showing surface water- widnr gis portal
+
+        - **Groundwater Watersheds**- watershed boundaries and the areas they cover- widnr gis portal
+
+        - **Water management units**- outlines of water management units- widnr gis portal
+
+        - **Municipal Boundaries**- outlines of major municipal areas- LTSB gis portal
+
+        - **Municipal “Utilities”**- point data showing municipal wells, linked to boundaries- public service commission (WI)
+
+        - **Legend**- legend showing which objects are represented by what color
+
+        - **Overview**- text displayed for informational background and user information
+
+    
+    - Interactions
+        - **Location search**- Search: Location; Overlay: Objects. Find a point and present the watershed boundaries it is within
+
+        - **Watershed hover**- Retrieve: Objects. Hover over a watershed to highlight boundary, popup with 
+
+        - **Watershed selection**- Retrieve: Objects. Click on displayed watershed to display text box that gives information about the watershed, either ground or surface
+
+        - **Surface water hover**- Retrieve: Objects. Hover over a surface water feature to show popup that displays what feature is.
+
+        - **Water management unit hover**- Retrieve: Objects. Hover on a water management boundary for popup showing name of unit
+
+        - **Overlay filter**- Filter: Objects; Overlay: Objects. Menu selection to toggle what layers are displayed, ability to change map objects
+
 
 3. Wireframes
 
