@@ -23,6 +23,7 @@
 
 3. Wireframes
 
+    - Available in the 'img' folder
 
 
 
