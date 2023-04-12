@@ -58,10 +58,15 @@
     - Images also available in the 'img' folder
 
 ![Opening Page Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/1.FirstLook.jpg "Opening Page")
+-
 ![Search Input Page Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/2.LocationEntry.jpg "Search Input Page")
+-
 ![Specific Location Search Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/3.AddressLookup.jpg "Specific Location Search")
+-
 ![Affected Areas Search Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/4.AffectedAreaLookup.jpg "Affected Areas Search")
+-
 ![Wisconsin Aquifers Page Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/5.AllAquiferInfo.jpg "Wisconsin Aquifers")
+-
 ![Wisconsin Watersheds Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/6.AllWatershedInfo.jpg "Wisconsin Watersheds")
 
 
