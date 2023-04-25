@@ -1,8 +1,8 @@
 //insert code here!
 //declare map variable globally so all functions have access
 var map;
-var minValue;
-var dataStats = {};
+//var minValue;
+//var dataStats = {};
 
 //step 1 create map
 function createMap() {
@@ -14,10 +14,9 @@ function createMap() {
     });
 
     //add OSM base tilelayer
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 20
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'    
     }).addTo(map);
 
     //call getData function
@@ -25,4 +24,3 @@ function createMap() {
 };
 
 document.addEventListener('DOMContentLoaded', createMap)
-//ADDED TO REUPLOAD TO GITHUB
