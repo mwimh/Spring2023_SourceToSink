@@ -54,6 +54,16 @@ function getData(map) {
             var test = new L.TopoJSON(json);
             test.addTo(map)
         })
+    fetch("data/Hydrologic_Units_-_10_digit_(Watersheds).json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            console.log(json)
+            var test = new L.TopoJSON(json);
+            test.addTo(map)
+        })
 };
 
 document.addEventListener('DOMContentLoaded', createMap)
