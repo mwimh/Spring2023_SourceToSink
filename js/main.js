@@ -23,4 +23,17 @@ function createMap() {
     //getData(map);
 };
 
+// Load and convert geojson data to be used
+function getData() {
+    // Load the data from the data folder
+    fetch("data/IndustEmp.geojson")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            var attributes = processData(json);
+        })
+};
+
 document.addEventListener('DOMContentLoaded', createMap)
