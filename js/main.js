@@ -31,6 +31,12 @@ function createMap() {
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'    
     }).addTo(map);
 
+    /*const search = new GeoSearch.GeoSearchControl({
+        provider: new GeoSearch.OpenStreetMapProvider(),
+      });
+      
+      map.addControl(search);*/
+
     //call getData function
     getData(map);
 };
