@@ -4,10 +4,8 @@ var map;
 //var minValue;
 //var dataStats = {};
 
-//step 1 create map
+//Creating The Basemap
 function createMap() {
-
-    //create the map
     map = L.map('map', {
         center: [45, -90],
         zoom: 7.5
