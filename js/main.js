@@ -4,6 +4,20 @@ var map;
 //var minValue;
 //var dataStats = {};
 
+L.TopoJSON = L.GeoJSON.extend({
+    addData: function(jsonData) {
+        if (jsonData.type === 'Topology') {
+            for (key in jsonData.objects) {
+             geojson = topojson.feature(jsonData, jsonData.objects[key]);
+             L.GeoJSON.prototype.addData.call(this, geojson);
+        }
+    }
+    else {
+        L.GeoJSON.prototype.addData.call(this, jsonData);
+        }
+    }
+});
+
 //Creating The Basemap
 function createMap() {
     map = L.map('map', {
@@ -18,19 +32,21 @@ function createMap() {
     }).addTo(map);
 
     //call getData function
-    //getData(map);
+    getData(map);
 };
 
 // Load and convert geojson data to be used
-function getData() {
+function getData(map) {
     // Load the data from the data folder
-    fetch("data/IndustEmp.geojson")
+    fetch("data/Hydrologic_Units_-_8_digit_(Subbasins).json")
         .then(function (response) {
             return response.json();
         })
         // Call functions to create the map data
         .then(function (json) {
-            var attributes = processData(json);
+            console.log(json)
+            var test = new L.TopoJSON(json);
+            test.addTo(map)
         })
 };
 
