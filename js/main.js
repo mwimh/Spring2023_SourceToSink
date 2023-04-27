@@ -5,15 +5,15 @@ var map;
 //var dataStats = {};
 
 L.TopoJSON = L.GeoJSON.extend({
-    addData: function(jsonData) {
+    addData: function (jsonData) {
         if (jsonData.type === 'Topology') {
             for (key in jsonData.objects) {
-             geojson = topojson.feature(jsonData, jsonData.objects[key]);
-             L.GeoJSON.prototype.addData.call(this, geojson);
+                geojson = topojson.feature(jsonData, jsonData.objects[key]);
+                L.GeoJSON.prototype.addData.call(this, geojson);
+            }
         }
-    }
-    else {
-        L.GeoJSON.prototype.addData.call(this, jsonData);
+        else {
+            L.GeoJSON.prototype.addData.call(this, jsonData);
         }
     }
 });
@@ -28,7 +28,7 @@ function createMap() {
     //add OSM base tilelayer
     L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
         maxZoom: 20,
-        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'    
+        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     /*const search = new GeoSearch.GeoSearchControl({
@@ -63,6 +63,25 @@ function getData(map) {
             console.log(json)
             var test = new L.TopoJSON(json);
             test.addTo(map)
+        })
+
+    fetch("data/WI_StreamsAndRivers_3+.topojson")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (json) {
+            var jsonName = 'WI_StreamsAndRivers_3+';
+            var streamStroke = json.objects;
+            console.log(streamStroke);
+            console.log(json);
+            var rivers = new L.TopoJSON(json, {
+                style: {
+                    "color": "#ff7800",
+                    "weight": 5,
+                    "opacity": 0.65
+                }
+            });
+            rivers.addTo(map);
         })
 };
 
