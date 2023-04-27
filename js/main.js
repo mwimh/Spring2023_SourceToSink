@@ -24,21 +24,19 @@ function createMap() {
         center: [45, -90],
         zoom: 7.5
     });
-
-    //add OSM base tilelayer
+    //add tilelayer
     L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
         maxZoom: 20,
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'    
     }).addTo(map);
-
-    //call getData function
+    //GetData Function
     getData(map);
 };
 
 // Load and convert geojson data to be used
 function getData(map) {
     // Load the data from the data folder
-    fetch("data/Hydrologic_Units_-_8_digit_(Subbasins).json")
+    fetch("data/Hydrologic_Units_-_8_digit_(Subbasins).topojson")
         .then(function (response) {
             return response.json();
         })
@@ -48,7 +46,7 @@ function getData(map) {
             var test = new L.TopoJSON(json);
             test.addTo(map)
         })
-    fetch("data/Hydrologic_Units_-_10_digit_(Watersheds).json")
+    fetch("data/Hydrologic_Units_-_10_digit_(Watersheds).topojson")
         .then(function (response) {
             return response.json();
         })
