@@ -1,6 +1,36 @@
 /*insert style here*/
-#map { 
-    height: 97vh;
+#title-bar {
     width: 100%;
+    height: 80px;
+    Background: black;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.title-text {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-image: linear-gradient(90deg, #bdc9e1, #74a9cf, #045a8d);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 400;
+    font-size: 50px;
+    text-align: center; 
+    margin: 0; 
+}
+
+#right-panel{
+    width: 20%;
+    height: 88vh;
+    background: black;
+    border-radius: 15px;
+    display: inline-block;
+    margin-right: 10px;
+
+}
+
+#map { 
+    height: 88vh;
+    width: 79%;
     display: inline-block;
 }
