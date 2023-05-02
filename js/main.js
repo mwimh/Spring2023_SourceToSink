@@ -4,6 +4,9 @@ var map;
 //var minValue;
 //var dataStats = {};
 
+// you want to get it of the window global
+const provider = new GeoSearch.OpenStreetMapProvider();
+
 //declares access token for Mapbox Studio Basemap
 L.mapbox.accessToken = 'pk.eyJ1IjoibWpvaG5zb241OCIsImEiOiJjbGE4ZGw0c2kwMm9hM29wZXptaDBicGN6In0.AR9-PLqnMTKB16mUsF1YcA';
 
@@ -57,11 +60,11 @@ function createMap() {
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    /*const search = new GeoSearch.GeoSearchControl({
+    const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
       });
       
-      map.addControl(search);*/
+      map.addControl(search);
 
     //call getData function
     getData(map);
