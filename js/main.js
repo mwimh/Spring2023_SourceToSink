@@ -6,7 +6,7 @@
 
 // you want to get it of the window global
 const provider = new GeoSearch.OpenStreetMapProvider();
-
+console.log(provider)
 //declares access token for Mapbox Studio Basemap
 
 
@@ -41,9 +41,10 @@ function createMap() {
     const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
       });
-      
-      map.addControl(search);
+    console.log(search)
 
+    L.addControl(search);
+      console.log(addControl)
     //call getData function
     getData(map);
 };
