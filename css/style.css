@@ -13,10 +13,10 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    font-weight: 400;
+    font-weight: 800;
     font-size: 50px;
     text-align: center; 
-    margin: 0; 
+    margin-top: 15px; 
 }
 
 #right-panel{
