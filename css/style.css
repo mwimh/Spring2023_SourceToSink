@@ -1,10 +1,20 @@
 /*insert style here*/
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 #title-bar {
-    width: 100%;
+    width: 95%;
     height: 80px;
     Background: black;
     border-radius: 15px;
     margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .title-text {
@@ -16,21 +26,23 @@
     font-weight: 800;
     font-size: 50px;
     text-align: center; 
-    margin-top: 15px; 
+    margin-top: 10px; 
 }
 
 #right-panel{
-    width: 20%;
+    width: 15%;
     height: 88vh;
     background: black;
     border-radius: 15px;
     display: inline-block;
     margin-right: 10px;
+    margin-left: 10px;
 
 }
 
 #map { 
     height: 88vh;
-    width: 79%;
+    width: 75%;
     display: inline-block;
+    margin-right: 10px;
 }
