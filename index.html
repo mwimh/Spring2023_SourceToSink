@@ -9,11 +9,13 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="lib/leaflet/leaflet.css">
         <link rel="stylesheet" href="css/geosearch.css">
-        <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css'/>
+       
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
         
         <!--[if IE<9]>
-            <link rel="stylesheet" href="css/style.ie.css">
-        <![endif]-->
+            <link rel="stylesheet" href="css/style.ie.css"><![endif]-->
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+        
 
          <!--you can also place internal styles here;
              place these within <style> tags-->
@@ -26,7 +28,19 @@
         
         <!--you can also use this space for internal scripts;
         place these within <script> tags-->
-        
+        <script>
+            // TO MAKE THE MAP APPEAR YOU MUST
+            // ADD YOUR ACCESS TOKEN FROM
+            // https://account.mapbox.com
+            mapboxgl.accessToken = 'pk.eyJ1IjoibWpvaG5zb241OCIsImEiOiJjbGE4ZGw0c2kwMm9hM29wZXptaDBicGN6In0.AR9-PLqnMTKB16mUsF1YcA';
+            const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mjohnson58/clgy3afk400ok01pb5aqc3wqb', // style URL
+            center: [-89.45828, 44.04200], // starting position [lng, lat]
+            zoom: 6, // starting zoom
+            });
+            </script>
+
 
         <!--put your external script links here-->
         <!--External Data Packages-->
@@ -36,7 +50,7 @@
         <script type="text/javascript" src="lib/package/dist/d3.min.js"></script> 
         <script type="text/javascript" src="lib/jquery-3.5.1.js"></script>
         <script type="text/javascript" src="lib/geosearch.umd.js"></script>
-        <script type="text/javascript" src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+        
 
         <!--JavaScript Link-->
         <script type="text/javascript" src="js/main.js"></script>
