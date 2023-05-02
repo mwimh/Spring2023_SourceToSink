@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-            <title></title>
+            <title>Source to Sink</title>
 
         <!--put your external stylesheet links here-->
         <link rel="stylesheet" href="css/style.css">
@@ -35,12 +35,10 @@
         <!--you can also use this space for internal scripts;
         place these within <script> tags-->
         <script>
-            // TO MAKE THE MAP APPEAR YOU MUST
-            // ADD YOUR ACCESS TOKEN FROM
-            // https://account.mapbox.com
             mapboxgl.accessToken = 'pk.eyJ1IjoibWpvaG5zb241OCIsImEiOiJjbGE4ZGw0c2kwMm9hM29wZXptaDBicGN6In0.AR9-PLqnMTKB16mUsF1YcA';
             const map = new mapboxgl.Map({
             container: 'map', // container ID
+            projection: 'albers', //albers projection
             style: 'mapbox://styles/mjohnson58/clgy3afk400ok01pb5aqc3wqb', // style URL
             center: [-90, 44.8], // starting position [lng, lat]
             zoom: 6.5, // starting zoom
