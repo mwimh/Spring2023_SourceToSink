@@ -4,6 +4,9 @@
 //var minValue;
 //var dataStats = {};
 
+// you want to get it of the window global
+const provider = new GeoSearch.OpenStreetMapProvider();
+
 //declares access token for Mapbox Studio Basemap
 
 
@@ -35,11 +38,11 @@ function createMap() {
             attribution: '© <a href="https://www.mapbox.com/contribute/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-    /*const search = new GeoSearch.GeoSearchControl({
+    const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
       });
       
-      map.addControl(search);*/
+      map.addControl(search);
 
     //call getData function
     getData(map);
