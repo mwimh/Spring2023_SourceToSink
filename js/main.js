@@ -4,6 +4,10 @@ var map;
 //var minValue;
 //var dataStats = {};
 
+//declares access token for Mapbox Studio Basemap
+L.mapbox.accessToken = 'pk.eyJ1IjoibWpvaG5zb241OCIsImEiOiJjbGE4ZGw0c2kwMm9hM29wZXptaDBicGN6In0.AR9-PLqnMTKB16mUsF1YcA';
+
+//
 L.TopoJSON = L.GeoJSON.extend({
     addData: function (jsonData) {
         if (jsonData.type === 'Topology') {
@@ -17,6 +21,29 @@ L.TopoJSON = L.GeoJSON.extend({
         }
     }
 });
+
+// function createMap() {
+//     var map = L.map('map').setView([38.97416, -95.23252], 15);
+
+//     // Add tiles from the Mapbox Static Tiles API
+//     // (https://docs.mapbox.com/api/maps/#static-tiles)
+//     // Tiles are 512x512 pixels and are offset by 1 zoom level
+//     L.tileLayer(
+//         'https://api.mapbox.com/styles/v1/mjohnson58/clgy3afk400ok01pb5aqc3wqb/wmts?access_token=pk.eyJ1IjoibWpvaG5zb241OCIsImEiOiJjbGE4ZGw0c2kwMm9hM29wZXptaDBicGN6In0.AR9-PLqnMTKB16mUsF1YcA', {
+//             tileSize: 512,
+//             zoomOffset: -1,
+//             attribution: '© <a href="https://www.mapbox.com/contribute/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+//         }).addTo(map);
+
+//     /*const search = new GeoSearch.GeoSearchControl({
+//         provider: new GeoSearch.OpenStreetMapProvider(),
+//       });
+      
+//       map.addControl(search);*/
+
+//     //call getData function
+//     getData(map);
+// };
 
 //Creating The Basemap
 function createMap() {
