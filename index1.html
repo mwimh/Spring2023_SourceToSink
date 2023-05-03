@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+            <title>Source to Sink</title>
+
+        <!--put your external stylesheet links here-->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+        <link rel="stylesheet" href="css/geosearch.css">
+       
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+        
+        <!--[if IE<9]>
+            <link rel="stylesheet" href="css/style.ie.css"><![endif]-->
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+        
+
+         <!--you can also place internal styles here;
+             place these within <style> tags-->
+        
+    </head>
+
+    <body>
+        <!--put your initial page content here-->
+        <div id="title-bar">
+            <h4 class="title-text">Source to Sink: Watershed Viewer</h4>
+        </div>
+
+        <!--<div class="popup">
+            <button id="close">&times;</button>
+            <h1>This is the title.</h1>
+            <p>
+                This is the body line.
+            </p>
+            <a href="#">Let's Go</a>
+        </div>-->
+
+        <div id="left-panel">
+            <form id="form">
+                <div id="checkBox">
+                    <p><label class="container" style="color: azure; padding-top: 15px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif;">HUC10 Watersheds
+                        <input name="category" value="Huc10" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></p>
+
+                    <p><label class="container" style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">HUC8 Watersheds
+                        <input name="category" value="Huc8" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></p>
+
+                    <p><label class="container" style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Municipal Boundaries
+                        <input name="category" value="Cities" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></p>
+
+                    <p><label class="container" style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Sub-Continental Divide Lines
+                        <input name="category" value="Divides" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></p>
+                
+                    <p><label class="container" style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Roads and Highways
+                        <input name="category" value="Roads" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></div></p>
+                </div>
+            </form>   
+        </div>
+
+        <div id="map"></div>
+        
+        <!--you can also use this space for internal scripts;
+        place these within <script> tags-->
+       <!--<script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoibWpvaG5zb241OCIsImEiOiJjbGE4ZGw0c2kwMm9hM29wZXptaDBicGN6In0.AR9-PLqnMTKB16mUsF1YcA';
+            const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            projection: 'albers', //albers projection
+            style: 'mapbox://styles/mjohnson58/clgy3afk400ok01pb5aqc3wqb', // style URL
+            center: [-90, 44.8], // starting position [lng, lat]
+            zoom: 6.5, // starting zoom
+            });
+        </script>-->
+
+
+        <!--put your external script links here-->
+        <!--External Data Packages-->
+        <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
+        <script type="text/javascript" src="lib/topojson.min.js"></script>
+        <script type="text/javascript" src="lib/topojson.v1.min.js"></script>
+        <script type="text/javascript" src="lib/package/dist/d3.min.js"></script> 
+        <script type="text/javascript" src="lib/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="lib/geosearch.umd.js"></script>
+        
+
+        <!--JavaScript Link-->
+        <script type="text/javascript" src="js/geocode.js"></script>
+
+    </body>
+</html>
