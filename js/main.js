@@ -4,20 +4,20 @@
 //var minValue;
 //var dataStats = {};
 
-window.addEventListener("load", function(){
+window.addEventListener("load", function () {
     this.setTimeout(
-        function open(event){
+        function open(event) {
             document.querySelector(".popup").style.display = "block";
         },
         0
     )
 });
 
-document.querySelector("#close").addEventListener("click", function(){
+document.querySelector("#close").addEventListener("click", function () {
     document.querySelector(".popup").style.display = "none";
 });
 
-document.querySelector("#letsGo").addEventListener("click", function(){
+document.querySelector("#letsGo").addEventListener("click", function () {
     document.querySelector(".popup").style.display = "none";
 });
 
@@ -28,7 +28,7 @@ console.log(provider)*/
 
 
 //
-var cities, rivers, huc8;
+var cities, rivers, huc8, huc10;
 
 L.TopoJSON = L.GeoJSON.extend({
     addData: function (jsonData) {
@@ -49,7 +49,7 @@ function createMap() {
 
     //map boundaries
     var northW = L.latLng(49, -98);
-        southE = L.latLng(41, -84);
+    southE = L.latLng(41, -84);
     var bounds = L.latLngBounds(northW, southE);
 
     map.setMaxBounds(bounds);
@@ -72,17 +72,17 @@ function createMap() {
         }).addTo(curMap);*/
 
     var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(curMap);
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(curMap);
 
-        var provider = new window.GeoSearch.OpenStreetMapProvider();
-        var searchControl = new window.GeoSearch.GeoSearchControl({
-            provider: provider,
-            style: 'button'
-        });
-        //map.addControl(searchControl);
-        console.log(searchControl);
+    var provider = new window.GeoSearch.OpenStreetMapProvider();
+    var searchControl = new window.GeoSearch.GeoSearchControl({
+        provider: provider,
+        style: 'button'
+    });
+    //map.addControl(searchControl);
+    console.log(searchControl);
     /*const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
       });
@@ -110,7 +110,7 @@ function createMap() {
 //     /*const search = new GeoSearch.GeoSearchControl({
 //         provider: new GeoSearch.OpenStreetMapProvider(),
 //       });
-      
+
 //       map.addControl(search);*/
 
 //     //call getData function
@@ -159,57 +159,84 @@ function getData(map) {
             });
             rivers.addTo(map);
         })*/
-        fetch("data/cities.json")
+    fetch("data/cities.json")
         .then(function (response) {
             return response.json();
         })
         // Call functions to create the map data
         .then(function (json) {
-            cities = new L.geoJson(json,{
-                style:function(feature){
-                    return{
-                        fillColor:"red",
-                        color:"white"
+            cities = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        fillColor: "red",
+                        color: "white"
                     }
                 }
             });
         })
 
-        fetch("data/HUC8_WGS.json")
+
+        fetch("data/huc10.json")
         .then(function (response) {
             return response.json();
         })
         // Call functions to create the map data
         .then(function (json) {
-            huc8 = new L.geoJson(json,{
-                style:function(feature){
-                    return{
-                        fillColor:"blue",
-                        color:"white"
+            huc10 = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        //fillColor: "orange",
+                        color: "black"
                     }
                 }
             });
         })
+        
+    fetch("data/HUC8_WGS.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            huc8 = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        fillColor: "blue",
+                        color: "white"
+                    }
+                }
+            });
+        })
+
+
 };
 
-function checkboxes(map){
-    document.querySelectorAll(".checkbox").forEach(function(box){
-        box.addEventListener("change", function(){
-            if (box.checked){
-                if (box.value == "cities"){
+function checkboxes(map) {
+    document.querySelectorAll(".checkbox").forEach(function (box) {
+        box.addEventListener("change", function () {
+            if (box.checked) {
+                if (box.value == "cities") {
                     cities.addTo(map);
                 }
-                if (box.value == "huc8"){
+                if (box.value == "huc10") {
+                    huc10.addTo(map);
+                }
+                if (box.value == "huc8") {
                     huc8.addTo(map);
                 }
+
             }
-            else{
-                if (box.value == "cities"){
+            else {
+                if (box.value == "cities") {
                     map.removeLayer(cities);
                 }
-                if (box.value == "huc8"){
+                if (box.value == "huc10") {
+                    map.removeLayer(huc10);
+                }
+                if (box.value == "huc8") {
                     map.removeLayer(huc8);
                 }
+
             }
         })
     })
