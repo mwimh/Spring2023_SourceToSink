@@ -17,6 +17,10 @@ document.querySelector("#close").addEventListener("click", function(){
     document.querySelector(".popup").style.display = "none";
 });
 
+document.querySelector("#letsGo").addEventListener("click", function(){
+    document.querySelector(".popup").style.display = "none";
+});
+
 // you want to get it of the window global
 /*const provider = new GeoSearch.OpenStreetMapProvider();
 console.log(provider)*/
