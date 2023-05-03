@@ -177,7 +177,7 @@ function getData(map) {
         })
 
 
-        fetch("data/huc10.json")
+    fetch("data/huc10.json")
         .then(function (response) {
             return response.json();
         })
@@ -186,8 +186,8 @@ function getData(map) {
             huc10 = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        //fillColor: "orange",
-                        color: "black"
+                        fillColor: "none",
+                        color: "grey"
                     }
                 }
             });
@@ -203,7 +203,8 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         fillColor: "blue",
-                        color: "white"
+                        color: "white",
+                        weight: 5
                     }
                 }
             });
