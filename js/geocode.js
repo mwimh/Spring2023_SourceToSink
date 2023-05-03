@@ -1,6 +1,7 @@
 /**
  * geocoding addresses search engine outside the map
  */
+//https://tomickigrzegorz.github.io/leaflet-examples/#21.geocoding-addresses-search-engine-outside-the-map
 
 window.addEventListener("DOMContentLoaded", function () {
     // Autocomplete

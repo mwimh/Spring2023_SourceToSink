@@ -82,18 +82,20 @@ function createMap() {
         provider: provider,
         style: 'button'
     });
-    //map.addControl(searchControl);
-    console.log(searchControl);
-    /*const search = new GeoSearch.GeoSearchControl({
+   
+    
+    const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
       });
     console.log(search)
 
     L.addControl(search);
-      console.log(addControl)
+    console.log(addControl)
     //call getData function*/
     getData(curMap);
     checkboxes(curMap);
+    curMap.addControl(searchControl);
+    console.log(searchControl);
 };
 
 //Creating The Basemap
