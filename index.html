@@ -40,19 +40,32 @@
         <div id="left-panel">
             <form id="form">
                 <div id="checkBox">
-                    <label class="container" style="color: #ffffff; padding-top: 15px;">HUC10 Watersheds
+                    <p><label class="container" style="color: azure; padding-top: 15px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif;">HUC10 Watersheds
                         <input name="category" value="Huc10" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
                         <span class="checkmark" style="margin-top: 10px;"></span>
-                    </label>
-                    <label class="container" style="color: #ffffff; padding-top: 5px;">HUC8 Watersheds
+                    </label></p>
+
+                    <p><label class="container" style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">HUC8 Watersheds
                         <input name="category" value="Huc8" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
                         <span class="checkmark" style="margin-top: 10px;"></span>
-                    </label>
+                    </label></p>
+
+                    <p><label class="container" style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Municipal Boundaries
+                        <input name="category" value="Cities" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></p>
+
+                    <p><label class="container" style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Sub-Continental Divide Lines
+                        <input name="category" value="Divides" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></p>
                 
+                    <p><label class="container" style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Roads and Highways
+                        <input name="category" value="Roads" type="checkbox" checked="checked" onclick="getCheckedCheckboxesFor()">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></div></p>
                 </div>
-                
-            </form>
-            
+            </form>   
         </div>
 
         <div id="map"></div>
