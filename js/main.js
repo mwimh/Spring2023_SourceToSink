@@ -4,18 +4,18 @@
 //var minValue;
 //var dataStats = {};
 
-/*window.addEventListener("load", function(){
+window.addEventListener("load", function(){
     this.setTimeout(
         function open(event){
-            document.querySelector(".popup").getElementsByClassName.display = "block";
+            document.querySelector(".popup").style.display = "block";
         },
-        1000
+        0
     )
 });
 
 document.querySelector("#close").addEventListener("click", function(){
-    document.querySelector(".popup").display = "none";
-});*/
+    document.querySelector(".popup").style.display = "none";
+});
 
 // you want to get it of the window global
 /*const provider = new GeoSearch.OpenStreetMapProvider();
@@ -24,6 +24,8 @@ console.log(provider)*/
 
 
 //
+var cities, rivers;
+
 L.TopoJSON = L.GeoJSON.extend({
     addData: function (jsonData) {
         if (jsonData.type === 'Topology') {
@@ -39,7 +41,7 @@ L.TopoJSON = L.GeoJSON.extend({
 });
 
 function createMap() {
-    var map = L.map('map').setView([38.97416, -95.23252], 15);
+    var map = L.map('map').setView([45, -90], 8);
 
     //map boundaries
     var northW = L.latLng(49, -98);
@@ -53,16 +55,21 @@ function createMap() {
         });
     });
 
-    curMap = map
+    var curMap = map
 
     // Add tiles from the Mapbox Static Tiles API
     // (https://docs.mapbox.com/api/maps/#static-tiles)
     // Tiles are 512x512 pixels and are offset by 1 zoom level
-    L.tileLayer(
+    /*L.tileLayer(
         'https://api.mapbox.com/styles/v1/mjohnson58/clgy3afk400ok01pb5aqc3wqb/wmts?access_token=pk.eyJ1IjoibWpvaG5zb241OCIsImEiOiJjbGE4ZGw0c2kwMm9hM29wZXptaDBicGN6In0.AR9-PLqnMTKB16mUsF1YcA', {
             tileSize: 512,
             zoomOffset: -1,
             attribution: '© <a href="https://www.mapbox.com/contribute/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(curMap);*/
+
+    var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(curMap);
 
         var provider = new window.GeoSearch.OpenStreetMapProvider();
@@ -70,7 +77,7 @@ function createMap() {
             provider: provider,
             style: 'button'
         });
-        map.addControl(searchControl);
+        //map.addControl(searchControl);
         console.log(searchControl);
     /*const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
@@ -81,6 +88,7 @@ function createMap() {
       console.log(addControl)
     //call getData function*/
     getData(curMap);
+    checkboxes(curMap);
 };
 
 //Creating The Basemap
@@ -108,7 +116,7 @@ function createMap() {
 // Load and convert geojson data to be used
 function getData(map) {
     // Load the data from the data folder
-    fetch("data/Hydrologic_Units_-_8_digit_(Subbasins).topojson")
+    /*fetch("data/Hydrologic_Units_-_8_digit_(Subbasins).topojson")
         .then(function (response) {
             return response.json();
         })
@@ -146,7 +154,39 @@ function getData(map) {
                 }
             });
             rivers.addTo(map);
+        })*/
+        fetch("data/cities.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            cities = new L.geoJson(json,{
+                style:function(feature){
+                    return{
+                        fillColor:"red",
+                        color:"white"
+                    }
+                }
+            });
         })
 };
+
+function checkboxes(map){
+    document.querySelectorAll(".checkbox").forEach(function(box){
+        box.addEventListener("change", function(){
+            if (box.checked){
+                if (box.value == "cities"){
+                    cities.addTo(map);
+                }
+            }
+            else{
+                if (box.value == "cities"){
+                    map.removeLayer(cities);
+                }
+            }
+        })
+    })
+}
 
 document.addEventListener('DOMContentLoaded', createMap)
