@@ -18,6 +18,7 @@
     border-radius: 15px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     display: none;
+    z-index: 10000000;
 }
 
 .popup button{

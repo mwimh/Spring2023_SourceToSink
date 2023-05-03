@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="lib/leaflet/leaflet.css">
         <link rel="stylesheet" href="css/geosearch.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"/>
        
         <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
         
@@ -52,10 +53,16 @@
                         <p><label class="container"
                             style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif;">HUC10
                             Watersheds
-                            <input class="checkbox" name="category" value="huc10" type="checkbox" checked="checked">
+                            <input class="checkbox" name="category" value="huc10" type="checkbox">
                             <span class="checkmark" style="margin-top: 10px;"></span>
                         </label></p>
                 
+                        <p><label class="container"
+                            style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Rivers & Streams
+                            <input class="checkbox" name="category" value="rivers" type="checkbox">
+                            <span class="checkmark" style="margin-top: 10px;"></span>
+                        </label></p>
+
                     <p><label class="container"
                             style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Municipal
                             Boundaries
