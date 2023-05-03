@@ -191,7 +191,7 @@ function getData(map) {
                 }
             });
         })
-        
+
     fetch("data/HUC8_WGS.json")
         .then(function (response) {
             return response.json();
