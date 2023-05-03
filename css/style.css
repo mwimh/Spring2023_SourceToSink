@@ -7,10 +7,6 @@
     box-sizing: border-box;
 }
 
-body{
-    background-color: azure;
-}
-
 .popup{
     background-color: #ffffff;
     width: 450px;
@@ -52,11 +48,14 @@ a{
     padding: 5px 0;
 }*/
 
+body{
+    background-color: azure;
+}
 
 #title-bar {
     width: 100;
     height: 80px;
-    background-image: linear-gradient(90deg, #bdc9e1, #74a9cf, #045a8d);
+    background-image: linear-gradient(135deg, #bdc9e1, #74a9cf, #045a8d);
     border-radius: 15px;
     margin-bottom: 10px;
     margin-left: 10px;
