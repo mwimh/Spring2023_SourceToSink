@@ -67,25 +67,9 @@ function createMap() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(curMap);
 
-    var provider = new window.GeoSearch.OpenStreetMapProvider();
-    var searchControl = new window.GeoSearch.GeoSearchControl({
-        provider: provider,
-        style: 'button'
-    });
-   
-    
-    const search = new GeoSearch.GeoSearchControl({
-        provider: new GeoSearch.OpenStreetMapProvider(),
-      });
-    console.log(search)
-
-    L.addControl(search);
-    console.log(addControl)
     //call getData function*/
     getData(curMap);
     checkboxes(curMap);
-    curMap.addControl(searchControl);
-    console.log(searchControl);
 };
 
 // Load and convert geojson data to be used
