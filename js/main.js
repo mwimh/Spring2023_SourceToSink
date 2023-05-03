@@ -24,7 +24,7 @@ console.log(provider)*/
 
 
 //
-var cities, rivers;
+var cities, rivers, huc8;
 
 L.TopoJSON = L.GeoJSON.extend({
     addData: function (jsonData) {
@@ -170,6 +170,22 @@ function getData(map) {
                 }
             });
         })
+
+        fetch("data/HUC8_WGS.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            huc8 = new L.geoJson(json,{
+                style:function(feature){
+                    return{
+                        fillColor:"blue",
+                        color:"white"
+                    }
+                }
+            });
+        })
 };
 
 function checkboxes(map){
@@ -179,10 +195,16 @@ function checkboxes(map){
                 if (box.value == "cities"){
                     cities.addTo(map);
                 }
+                if (box.value == "huc8"){
+                    huc8.addTo(map);
+                }
             }
             else{
                 if (box.value == "cities"){
                     map.removeLayer(cities);
+                }
+                if (box.value == "huc8"){
+                    map.removeLayer(huc8);
                 }
             }
         })
