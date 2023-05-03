@@ -202,7 +202,7 @@ function getData(map) {
             huc8 = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        fillColor: "blue",
+                        fillColor: "grey",
                         color: "white",
                         weight: 5
                     }
@@ -210,6 +210,23 @@ function getData(map) {
             });
         })
 
+    fetch("data/rivers.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            rivers = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        color: "blue",
+                        //weight: 3
+                        weight: (feature.properties.STREAM_ORD-3)
+
+                    }
+                }
+            });
+        })
 
 };
 
@@ -226,6 +243,9 @@ function checkboxes(map) {
                 if (box.value == "huc8") {
                     huc8.addTo(map);
                 }
+                if (box.value == "rivers") {
+                    rivers.addTo(map);
+                }
 
             }
             else {
@@ -237,6 +257,9 @@ function checkboxes(map) {
                 }
                 if (box.value == "huc8") {
                     map.removeLayer(huc8);
+                }
+                if (box.value == "rivers") {
+                    map.removeLayer(rivers);
                 }
 
             }
