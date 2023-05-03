@@ -44,16 +44,16 @@ function createMap() {
     //map boundaries
     var northW = L.latLng(49, -98);
         southE = L.latLng(41, -84);
-    var mapBoundaries = L.latLngBounds(northW, southE);
+    var bounds = L.latLngBounds(northW, southE);
 
-    map.setMaxBounds(mapBoundaries);
+    map.setMaxBounds(bounds);
     map.on('drag', function () {
-        map.panInsideBounds(mapBoundaries, {
+        map.panInsideBounds(bounds, {
             animate: false
         });
     });
 
-    map = map
+    curMap = map
 
     // Add tiles from the Mapbox Static Tiles API
     // (https://docs.mapbox.com/api/maps/#static-tiles)
@@ -63,7 +63,7 @@ function createMap() {
             tileSize: 512,
             zoomOffset: -1,
             attribution: '© <a href="https://www.mapbox.com/contribute/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        }).addTo(curMap);
 
         var provider = new window.GeoSearch.OpenStreetMapProvider();
         var searchControl = new window.GeoSearch.GeoSearchControl({
@@ -80,7 +80,7 @@ function createMap() {
     L.addControl(search);
       console.log(addControl)
     //call getData function*/
-    getData(map);
+    getData(curMap);
 };
 
 //Creating The Basemap
