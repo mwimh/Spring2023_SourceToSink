@@ -4,7 +4,7 @@
 //var minValue;
 //var dataStats = {};
 
-window.addEventListener("load", function(){
+/*window.addEventListener("load", function(){
     this.setTimeout(
         function open(event){
             document.querySelector(".popup").getElementsByClassName.display = "block";
@@ -15,7 +15,7 @@ window.addEventListener("load", function(){
 
 document.querySelector("#close").addEventListener("click", function(){
     document.querySelector(".popup").display = "none";
-});
+});*/
 
 // you want to get it of the window global
 /*const provider = new GeoSearch.OpenStreetMapProvider();
@@ -40,6 +40,20 @@ L.TopoJSON = L.GeoJSON.extend({
 
 function createMap() {
     var map = L.map('map').setView([38.97416, -95.23252], 15);
+
+    //map boundaries
+    var northW = L.latLng(49, -98);
+        southE = L.latLng(41, -84);
+    var mapBoundaries = L.latLngBounds(northW, southE);
+
+    map.setMaxBounds(mapBoundaries);
+    map.on('drag', function () {
+        map.panInsideBounds(mapBoundaries, {
+            animate: false
+        });
+    });
+
+    map = map
 
     // Add tiles from the Mapbox Static Tiles API
     // (https://docs.mapbox.com/api/maps/#static-tiles)
