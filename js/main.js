@@ -141,10 +141,75 @@ function getData(map) {
             rivers = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        color: "blue",
-                        //weight: 3
+                        color: "#3F97DD",
                         weight: (feature.properties.STREAM_ORD - 2)
 
+                    }
+                }
+            });
+        })
+
+    fetch("data/stateDivide.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            stateDivide = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        color: "red",
+                        weight: 6
+                    }
+                }
+            });
+        })
+
+    fetch("data/greatLakes.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            greatLakes = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        fillColor: "green",
+                        color: "grey",
+                        weight: 2
+                    }
+                }
+            });
+        })
+
+    fetch("data/mississippi.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            mississippi = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        fillColor: "purple",
+                        color: "grey",
+                        weight: 2
+                    }
+                }
+            });
+        })
+
+    fetch("data/stateDivide.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            stateDivide = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        color: "red",
+                        weight: 6
                     }
                 }
             });
@@ -168,6 +233,11 @@ function checkboxes(map) {
                 if (box.value == "rivers") {
                     rivers.addTo(map);
                 }
+                if (box.value == "divides") {
+                    mississippi.addTo(map);
+                    greatLakes.addTo(map);
+                    stateDivide.addTo(map);
+                }
 
             }
             else {
@@ -182,6 +252,11 @@ function checkboxes(map) {
                 }
                 if (box.value == "rivers") {
                     map.removeLayer(rivers);
+                }
+                if (box.value == "divides") {
+                    map.removeLayer(mississippi);
+                    map.removeLayer(greatLakes);
+                    map.removeLayer(stateDivide);
                 }
 
             }
