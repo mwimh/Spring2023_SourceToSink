@@ -45,7 +45,7 @@ L.TopoJSON = L.GeoJSON.extend({
 });
 
 function createMap() {
-    var map = L.map('map').setView([45, -90], 8);
+    var map = L.map('map').setView([44.75, -90], 8);
 
     //map boundaries
     var northW = L.latLng(49, -96);
