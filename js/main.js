@@ -63,12 +63,12 @@ function createMap() {
 
     var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 12,
-        minZoom: 6.5,
+        minZoom: 7,
         zoomControl: false,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(curMap);
 
-    
+
     //call getData function*/
     getData(curMap);
     checkboxes(curMap);
@@ -93,7 +93,7 @@ function getData(map) {
                     }
                 }
             });
-            
+
         })
 
 
@@ -130,6 +130,7 @@ function getData(map) {
                 }
             });
         })
+        .then(self.name = "huc8class")
 
     fetch("data/rivers.json")
         .then(function (response) {
