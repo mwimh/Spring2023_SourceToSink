@@ -125,14 +125,14 @@ function getData(map) {
                     return {
                         fillColor: "none",
                         color: "purple",
-                        weight: 5
+                        weight: 8
                     }
                 }
             });
         })
         .then(self.name = "huc8class")
 
-    fetch("data/rivers.json")
+    fetch("data/streamsAll.json")
         .then(function (response) {
             return response.json();
         })
@@ -143,7 +143,7 @@ function getData(map) {
                     return {
                         color: "blue",
                         //weight: 3
-                        weight: (feature.properties.STREAM_ORD - 1.5)
+                        weight: (feature.properties.STREAM_ORD - 2)
 
                     }
                 }

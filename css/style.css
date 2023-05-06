@@ -76,7 +76,7 @@ body{
 }
 
 #left-panel{
-    width: 17%;
+    width: fit-content;
     height: 290px;
     background-image: linear-gradient(305deg, #bdc9e1, #74a9cf, #045a8d);
     border-radius: 15px;
