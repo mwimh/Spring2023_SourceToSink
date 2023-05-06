@@ -47,20 +47,31 @@
         <form id="form">
             <h3
                 style="margin-top: 0px; margin-left: 0px; color: azure; padding-top: 10px; font-size: xx-large; font-family: Georgia, 'Times New Roman', Times, serif;">
-                <u><b>Options</b></u></h3>
+                <u><b>Options</b></u>
+            </h3>
             <div id="checkBox">
 
+
                 <p><label class="container"
-                        style="color: azure; padding-top: 15px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">HUC 8 (Large)
+                        style="color: azure; padding-top: 15px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif;">HUC
+                        10 (Medium)
+                        Watersheds &nbsp
+                        <input class="checkbox" name="category" value="huc10" type="checkbox">
+                        <span class="checkmark" style="margin-top: 10px;"></span>
+                    </label></p>
+
+                <p><label class="container"
+                        style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">HUC
+                        8 (Large)
                         Watersheds &nbsp
                         <input class="checkbox" name="category" value="huc8" type="checkbox">
                         <span class="checkmark" style="margin-top: 10px;"></span>
                     </label></p>
 
                 <p><label class="container"
-                        style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif;">HUC 10 (Medium)
-                        Watersheds &nbsp
-                        <input class="checkbox" name="category" value="huc10" type="checkbox">
+                        style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Sub-Continental
+                        Divide Lines &nbsp
+                        <input class="checkbox" name="category" value="Divides" type="checkbox" checked="checked">
                         <span class="checkmark" style="margin-top: 10px;"></span>
                     </label></p>
 
@@ -78,12 +89,7 @@
                         <span class="checkmark" style="margin-top: 10px;"></span>
                     </label></p>
 
-                <p><label class="container"
-                        style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Sub-Continental
-                        Divide Lines &nbsp
-                        <input class="checkbox" name="category" value="Divides" type="checkbox" checked="checked">
-                        <span class="checkmark" style="margin-top: 10px;"></span>
-                    </label></p>
+
                 <!--
                     <p><label class="container"
                             style="color: azure; padding-top: 5px; font-size: x-large; font-family: Georgia, 'Times New Roman', Times, serif">Roads
