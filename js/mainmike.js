@@ -62,7 +62,7 @@ function createMap() {
     var curMap = map
 
     var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 13,
+        maxZoom: 19,
         minZoom: 6.5,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(curMap);
@@ -117,7 +117,7 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         fillColor: "grey",
-                        color: "white",
+                        color: "purple",
                         weight: 5
                     }
                 }

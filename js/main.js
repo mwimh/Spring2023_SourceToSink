@@ -49,7 +49,7 @@ function createMap() {
 
     //map boundaries
     var northW = L.latLng(49, -96);
-        southE = L.latLng(40, -84);
+    southE = L.latLng(40, -84);
     var bounds = L.latLngBounds(northW, southE);
 
     map.setMaxBounds(bounds);
@@ -62,14 +62,18 @@ function createMap() {
     var curMap = map
 
     var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+        maxZoom: 12,
         minZoom: 6.5,
+        zoomControl: false,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(curMap);
 
+    
     //call getData function*/
     getData(curMap);
     checkboxes(curMap);
+    UncheckAll();
+
 };
 
 // Load and convert geojson data to be used
@@ -84,10 +88,12 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         fillColor: "red",
-                        color: "white"
+                        color: "grey",
+                        weight: 1
                     }
                 }
             });
+            
         })
 
 
@@ -100,8 +106,9 @@ function getData(map) {
             huc10 = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        fillColor: "none",
-                        color: "grey"
+                        fillColor: "white",
+                        color: "orange",
+                        fillOpacity: 0.3
                     }
                 }
             });
@@ -116,8 +123,8 @@ function getData(map) {
             huc8 = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        fillColor: "grey",
-                        color: "white",
+                        fillColor: "none",
+                        color: "purple",
                         weight: 5
                     }
                 }
@@ -135,7 +142,7 @@ function getData(map) {
                     return {
                         color: "blue",
                         //weight: 3
-                        weight: (feature.properties.STREAM_ORD-3)
+                        weight: (feature.properties.STREAM_ORD - 1.5)
 
                     }
                 }
@@ -179,6 +186,20 @@ function checkboxes(map) {
             }
         })
     })
+
+    L.control.zoom({
+        position: 'bottomright'
+    }).addTo(map);
+
+}
+
+function UncheckAll() {
+    var w = document.getElementsByTagName('input');
+    for (var i = 0; i < w.length; i++) {
+        if (w[i].type == 'checkbox') {
+            w[i].checked = false;
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', createMap)
