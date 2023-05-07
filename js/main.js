@@ -180,6 +180,7 @@ function getData(map) {
                         fillColor: "green",
                         color: "black",
                         weight: 6,
+                        fillOpacity: 0.1,
                         className: 'greatLakesClass'
                     }
                 }
@@ -198,6 +199,7 @@ function getData(map) {
                         fillColor: "purple",
                         color: "black",
                         weight: 6,
+                        fillOpacity: 0.1,
                         className: 'mississippiClass'
                     }
                 }
