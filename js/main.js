@@ -89,7 +89,8 @@ function getData(map) {
                     return {
                         fillColor: "red",
                         color: "grey",
-                        weight: 1
+                        weight: 1,
+                        className: 'citiesClass'
                     }
                 }
             });
@@ -108,7 +109,8 @@ function getData(map) {
                     return {
                         fillColor: "white",
                         color: "orange",
-                        fillOpacity: 0.3
+                        fillOpacity: 0.3,
+                        className: 'huc10Class'
                     }
                 }
             });
@@ -125,7 +127,8 @@ function getData(map) {
                     return {
                         fillColor: "none",
                         color: "purple",
-                        weight: 5
+                        weight: 5,
+                        className: 'huc8Class'
                     }
                 }
             });
@@ -142,8 +145,8 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         color: "#3F97DD",
-                        weight: (feature.properties.STREAM_ORD - 2)
-
+                        weight: (feature.properties.STREAM_ORD - 2),
+                        className: 'riversClass'
                     }
                 }
             });
@@ -176,7 +179,8 @@ function getData(map) {
                     return {
                         fillColor: "green",
                         color: "black",
-                        weight: 6
+                        weight: 6,
+                        className: 'greatLakesClass'
                     }
                 }
             });
@@ -193,7 +197,8 @@ function getData(map) {
                     return {
                         fillColor: "purple",
                         color: "black",
-                        weight: 6
+                        weight: 6,
+                        className: 'mississippiClass'
                     }
                 }
             });
@@ -209,7 +214,8 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         color: "red",
-                        weight: 6
+                        weight: 6,
+                        className: 'stateDivideClass'
                     }
                 }
             });
@@ -277,5 +283,15 @@ function UncheckAll() {
         }
     }
 }
+
+/*
+On selection of point on map or input of address:
+1. Zoom to containing HUC 8 (map extents set to include entirity of HUC 8)
+2. Highlight the selected HUC 10
+3. Popup window below 'Options' displays info about HUC 10 (name, HUC 8 name, River System, where it flows,...)
+4. Find upstream HUC 10s in relationship CSV file (one layer upstream only to avoid confusion of contributing flow from further upstream)
+5. Highlight main river channel in river basin dark blue (by river system name)
+6. Highlight channels in upstream HUCs in light blue
+*/
 
 document.addEventListener('DOMContentLoaded', createMap)
