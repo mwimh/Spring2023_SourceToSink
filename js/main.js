@@ -125,7 +125,7 @@ function getData(map) {
                     return {
                         fillColor: "none",
                         color: "purple",
-                        weight: 8
+                        weight: 5
                     }
                 }
             });
@@ -175,8 +175,8 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         fillColor: "green",
-                        color: "grey",
-                        weight: 2
+                        color: "black",
+                        weight: 6
                     }
                 }
             });
@@ -192,8 +192,8 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         fillColor: "purple",
-                        color: "grey",
-                        weight: 2
+                        color: "black",
+                        weight: 6
                     }
                 }
             });
