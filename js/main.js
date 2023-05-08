@@ -74,6 +74,8 @@ function createMap() {
     checkboxes(curMap);
     UncheckAll();
 
+    L.Control.geocoder().addTo(curMap);
+
 };
 
 // Load and convert geojson data to be used
