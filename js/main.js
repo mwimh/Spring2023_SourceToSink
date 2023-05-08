@@ -108,6 +108,15 @@ function createMap() {
 
 };
 
+function selectFeatureFromGEOJSON(latlng, huc10) {
+    var latlng = (latlng.lat, latlng.lng);
+    var selectedFeature = null;
+    console.log(latlng);
+
+
+}
+
+
 function processData(data){
     //empty array to hold attributes
     var attributes = [];
