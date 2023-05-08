@@ -49,7 +49,7 @@ function createMap() {
 
     //map boundaries
     var northW = L.latLng(49, -96);
-        southE = L.latLng(40, -84);
+    southE = L.latLng(40, -84);
     var bounds = L.latLngBounds(northW, southE);
 
     map.setMaxBounds(bounds);
@@ -68,6 +68,11 @@ function createMap() {
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(curMap);
 
+    // Create a new geocoding control object
+    var geocoder = L.Control.geocoder({
+        defaultMarkGeocode: false,
+    }).addTo(curMap);
+    console.log(geocoder);
 
     //call getData function*/
     getData(curMap);
@@ -146,7 +151,7 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         color: "#3F97DD",
-                        weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD**0.65),
+                        weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD ** 0.65),
                         className: 'riversClass'
                     }
                 }
