@@ -49,7 +49,7 @@ function createMap() {
 
     //map boundaries
     var northW = L.latLng(49, -96);
-    southE = L.latLng(40, -84);
+        southE = L.latLng(40, -84);
     var bounds = L.latLngBounds(northW, southE);
 
     map.setMaxBounds(bounds);
@@ -61,11 +61,11 @@ function createMap() {
 
     var curMap = map
 
-    var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
         maxZoom: 12,
         minZoom: 7,
         zoomControl: false,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(curMap);
 
 
@@ -285,6 +285,20 @@ function UncheckAll() {
         }
     }
 }
+
+/*function onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+    if (feature.properties && feature.properties.HUC10_NAME) {
+        layer.bindPopup(feature.properties.HUC10_NAME);
+    }
+}*/
+
+/*function popupContent(feature, layer) {
+    var popupContent = "<p><b>HUC Name:</b>" + feature.properties.HUC10_NAME "</p>",
+    layer.bindPopup(popupContent, {
+        //offset: new L.Feature(0, )
+    })
+}*/
 
 /*
 On selection of point on map or input of address:

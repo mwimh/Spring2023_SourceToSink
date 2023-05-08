@@ -8,7 +8,7 @@
 }
 
 .popup{
-    background-color: #ffffff;
+    background-color: azure;
     width: 450px;
     padding: 30px 40px;
     position: absolute;
@@ -19,6 +19,11 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     display: none;
     z-index: 10000000;
+}
+
+#letsGo{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: azure;
 }
 
 .popup button{
@@ -37,7 +42,8 @@
     text-align: justify;
     margin: 20px 0;
 }
-a{
+
+e{
     display: block;
     width: 150px;
     position: relative;
@@ -88,7 +94,7 @@ body{
     margin-left: 10px;
     margin-right: 10px;
     position: absolute;
-    top: 90px;
+    top: 121px;
     z-index: 10;
 }
 
@@ -108,4 +114,8 @@ body{
 
 .huc8class {
     z-index: 20;
+}
+
+#search-form{
+    padding: 10px;
 }
