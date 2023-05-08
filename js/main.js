@@ -107,6 +107,27 @@ function createMap() {
 
 };
 
+function processData(data){
+    //empty array to hold attributes
+    var attributes = [];
+
+    //properties of the first feature in the dataset
+    var properties = data.features[0].properties;
+
+    /*//push each attribute name into attributes array
+    for (var attribute in properties){
+        //only take attributes with population values
+        if (attribute.indexOf("Visitors") > -1){
+            attributes.push(attribute);
+        };
+    };*/
+
+    //check result
+    console.log(attributes);
+
+    return attributes;
+};
+
 // Load and convert geojson data to be used
 function getData(map) {
     fetch("data/cities.json")
@@ -125,7 +146,8 @@ function getData(map) {
                     }
                 }
             });
-
+            var attributes = processData(json)
+            onEachFeature(json, attributes)
         })
 
 
@@ -301,6 +323,19 @@ function UncheckAll() {
             w[i].checked = false;
         }
     }
+}
+
+function onEachFeature(feature, layer) {
+    feature.on('mouseover', function () {
+      this.setStyle({
+        'fillColor': '#0000ff'
+      });
+    });
+    feature.on('mouseout', function () {
+      this.setStyle({
+        'fillColor': '#ff0000'
+      });
+    });
 }
 
 /*function onEachFeature(feature, layer) {

@@ -7,6 +7,25 @@
 * Alex Larson
 * Michael Imhoff
 
+
+Data: 
+
+    huc10.json
+    - HUC10_NAME = HUC 10 Name
+    - STREAM_ORD = Maximum stream order for HUC 10
+    - HUC8_NAME = Containing HUC 8 Name
+    - RiverBasin = Containing main river basin
+    - FlowDest = Where flow ends (Mississippi River or Great Lakes)
+    
+    mississippi.json/greatLakes.json
+    - riverBasin/riverName = Name of river basin
+    
+    streamsPerHuc10.json
+    - HUC10_Name = HUC 10 Name, each feature contains all the streams in each HUC 10
+    
+        
+    
+
 ### Final Proposal
 1. ***Persona/Scenarios***
     1. **Persona**
