@@ -8,8 +8,8 @@
 }
 
 .popup{
-    background-color: azure;
-    width: 650px;
+    background-image: linear-gradient(25deg, #bdc9e1, #74a9cf, #045a8d);
+    width: 750px;
     padding: 30px 40px;
     position: absolute;
     transform: translate(-50%,-50%);
@@ -19,11 +19,17 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     display: none;
     z-index: 10000000;
+    color: azure;
+    
 }
 
 #letsGo{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: azure;
+}
+
+#close{
+    color: white;
 }
 
 .popup button{
@@ -50,7 +56,7 @@ e{
     margin: auto;
     text-align: center;
     background-color: #045a8d;
-    color: #ffffff;
+    color: white;
     text-decoration: none;
     padding: 5px 0;
 }
