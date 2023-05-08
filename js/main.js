@@ -96,7 +96,15 @@ function createMap() {
     UncheckAll();
     
 
-    L.Control.geocoder().addTo(curMap);
+    var geocoder = L.Control.geocoder().addTo(curMap);
+
+    geocoder.on('markgeocode', function(event) {
+        var latlng = event.geocode.center;
+        console.log(latlng.lat, latlng.lng);
+
+        return(latlng.lat, latlng.lng);
+    })
+    
 
 };
 
