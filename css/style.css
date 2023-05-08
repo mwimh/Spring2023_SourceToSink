@@ -22,7 +22,7 @@
 }
 
 #letsGo{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: azure;
 }
 
@@ -66,7 +66,7 @@ e{
 }
 
 .title-text {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: azure;
     background-clip: text;
     -webkit-background-clip: text;
