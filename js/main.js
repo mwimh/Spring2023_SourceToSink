@@ -94,6 +94,7 @@ function createMap() {
     getData(curMap);
     checkboxes(curMap);
     UncheckAll();
+    
 
     L.Control.geocoder().addTo(curMap);
 
@@ -318,12 +319,12 @@ function UncheckAll() {
 }
 
 function onEachFeature(feature, layer) {
-    feature.on('mouseover', function () {
+    layer.on('mouseover', function () {
       this.setStyle({
         'fillColor': '#0000ff'
       });
     });
-    feature.on('mouseout', function () {
+    layer.on('mouseout', function () {
       this.setStyle({
         'fillColor': '#ff0000'
       });
