@@ -22,7 +22,7 @@ document.querySelector("#letsGo").addEventListener("click", function () {
 });
 
 //
-var cities, rivers, huc8, huc10;
+var cities, rivers, huc8, huc10, geojson;
 
 L.TopoJSON = L.GeoJSON.extend({
     addData: function (jsonData) {
@@ -53,23 +53,23 @@ function createMap() {
         });
     });
 
-    var curMap = map
+    var map = map
 
     var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
         maxZoom: 12,
         minZoom: 7,
         zoomControl: false,
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    }).addTo(curMap);
+    }).addTo(map);
 
 
     //call getData function*/
-    getData(curMap);
-    checkboxes(curMap);
+    getData(map);
+    checkboxes(map);
     UncheckAll();
     
 
-    var geocoder = L.Control.geocoder().addTo(curMap);
+    var geocoder = L.Control.geocoder().addTo(map);
 
     geocoder.on('markgeocode', function(event) {
         var latlng = event.geocode.center;
@@ -129,8 +129,7 @@ function getData(map) {
                     }
                 }
             });
-            var attributes = processData(json)
-            onEachFeature(json, attributes)
+        onEachFeature(json)
         })
 
 
@@ -308,32 +307,72 @@ function UncheckAll() {
     }
 }
 
-function onEachFeature(feature, layer) {
-    layer.on('mouseover', function () {
-      this.setStyle({
-        'fillColor': '#0000ff'
-      });
+/*function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
     });
-    layer.on('mouseout', function () {
-      this.setStyle({
-        'fillColor': '#ff0000'
-      });
+
+    layer.bringToFront();
+}
+
+function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+}
+
+/*function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}*/
+
+/*function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        //click: zoomToFeature
     });
 }
 
-/*function onEachFeature(feature, layer) {
-    // does this feature have a property named popupContent?
-    if (feature.properties && feature.properties.HUC10_NAME) {
-        layer.bindPopup(feature.properties.HUC10_NAME);
-    }
-}*/
+var info = L.control();
 
-/*function popupContent(feature, layer) {
-    var popupContent = "<p><b>HUC Name:</b>" + feature.properties.HUC10_NAME "</p>",
-    layer.bindPopup(popupContent, {
-        //offset: new L.Feature(0, )
-    })
-}*/
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML = '<h4>Watershed Information</h4>' +  (props ?
+        '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+        : 'Hover over a state');
+};
+
+info.addTo(map);
+
+var legend = L.control({position: 'bottomleft'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(map);*/
+
 
 /*
 On selection of point on map or input of address:

@@ -8,7 +8,7 @@
 }
 
 .popup{
-    background-image: linear-gradient(25deg, #bdc9e1, #74a9cf, #045a8d);
+    background-image: linear-gradient(25deg, #045a8d, #74a9cf, #adc8fd, #74a9cf, #045a8d);
     width: 750px;
     padding: 30px 40px;
     position: absolute;
@@ -20,7 +20,6 @@
     display: none;
     z-index: 10000000;
     color: azure;
-    
 }
 
 #letsGo{
@@ -123,3 +122,27 @@ e{
     padding: 10px;
 }
 
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
