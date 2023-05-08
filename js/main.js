@@ -109,7 +109,8 @@ function getData(map) {
                     return {
                         fillColor: "white",
                         color: "orange",
-                        fillOpacity: 0.3,
+                        fillOpacity: 0.4,
+                        weight: 1,
                         className: 'huc10Class'
                     }
                 }
@@ -127,7 +128,7 @@ function getData(map) {
                     return {
                         fillColor: "none",
                         color: "purple",
-                        weight: 5,
+                        weight: 3,
                         className: 'huc8Class'
                     }
                 }
@@ -145,28 +146,13 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         color: "#3F97DD",
-                        weight: (feature.properties.STREAM_ORD - 2),
+                        weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD**0.65),
                         className: 'riversClass'
                     }
                 }
             });
         })
 
-    fetch("data/stateDivide.json")
-        .then(function (response) {
-            return response.json();
-        })
-        // Call functions to create the map data
-        .then(function (json) {
-            stateDivide = new L.geoJson(json, {
-                style: function (feature) {
-                    return {
-                        color: "red",
-                        weight: 6
-                    }
-                }
-            });
-        })
 
     fetch("data/greatLakes.json")
         .then(function (response) {
@@ -179,7 +165,7 @@ function getData(map) {
                     return {
                         fillColor: "green",
                         color: "black",
-                        weight: 6,
+                        weight: 5,
                         fillOpacity: 0.1,
                         className: 'greatLakesClass'
                     }
@@ -198,7 +184,7 @@ function getData(map) {
                     return {
                         fillColor: "purple",
                         color: "black",
-                        weight: 6,
+                        weight: 5,
                         fillOpacity: 0.1,
                         className: 'mississippiClass'
                     }
@@ -216,7 +202,7 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         color: "red",
-                        weight: 6,
+                        weight: 8,
                         className: 'stateDivideClass'
                     }
                 }
