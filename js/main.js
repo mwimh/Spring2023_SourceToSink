@@ -68,11 +68,6 @@ function createMap() {
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(curMap);
 
-    // Create a new geocoding control object
-    var geocoder = L.Control.geocoder({
-        defaultMarkGeocode: false,
-    }).addTo(curMap);
-    console.log(geocoder);
 
     //call getData function*/
     getData(curMap);
