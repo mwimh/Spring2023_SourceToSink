@@ -21,33 +21,6 @@ document.querySelector("#letsGo").addEventListener("click", function () {
     document.querySelector(".popup").style.display = "none";
 });
 
-// you want to get it of the window global
-/*const provider = new GeoSearch.OpenStreetMapProvider();
-console.log(provider)*/
-//declares access token for Mapbox Studio Basemap
-
-//Link Geocoder to search form
-// Initialize the geocoder control and add it to the map
-var geocoder = L.Control.geocoder({
-    defaultMarkGeocode: false,
-  })//.addTo(map);
-  console.log(geocoder);
-  
-  // Handle search button click event
-  document.getElementById('search-btn').addEventListener('click', function() {
-    // Get the search input value
-    var searchValue = document.getElementById('search-input').value;
-  
-    // Use the geocoder to search for the location
-    geocoder.geocode(searchValue, function(results) {
-      if (results.length > 0) {
-        // Center the map on the first result
-        map.setView(results[0].center, 13);
-      } else {
-        alert('Location not found');
-      }
-    });
-  });
 //
 var cities, rivers, huc8, huc10;
 
