@@ -3,6 +3,7 @@
 
 //var minValue;
 //var dataStats = {};
+var map;
 
 window.addEventListener("load", function () {
     this.setTimeout(
@@ -66,7 +67,7 @@ function createMap() {
     //call getData function*/
     getData(map);
     checkboxes(map);
-    UncheckAll();
+
     
 
     var geocoder = L.Control.geocoder().addTo(map);
@@ -291,6 +292,8 @@ function checkboxes(map) {
             }
         })
     })
+
+    UncheckAll();
 
     L.control.zoom({
         position: 'bottomright'
