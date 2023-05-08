@@ -109,7 +109,7 @@ function getData(map) {
                     return {
                         fillColor: "white",
                         color: "orange",
-                        fillOpacity: 0.3,
+                        fillOpacity: 0.4,
                         weight: 1,
                         className: 'huc10Class'
                     }
