@@ -103,7 +103,7 @@ body{
 }
 
 .huc10class {
-    z-index: 10; 
+    fill: red; 
 }
 
 .huc8class {
