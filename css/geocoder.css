@@ -3,6 +3,7 @@
     background: white;
     min-width: 26px;
     min-height: 26px;
+    
   }
   
   .leaflet-touch .leaflet-control-geocoder {
@@ -31,6 +32,7 @@
   .leaflet-control-geocoder-form {
     display: none;
     vertical-align: middle;
+    display: inline-block;
   }
   .leaflet-control-geocoder-expanded .leaflet-control-geocoder-form {
     display: inline-block;
