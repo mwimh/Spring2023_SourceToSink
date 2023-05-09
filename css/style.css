@@ -85,7 +85,7 @@ e{
 
 #left-panel{
     width: fit-content;
-    height: 370px;
+    height: 350px;
     background-image: linear-gradient(305deg, #bdc9e1, #74a9cf, #045a8d);
     border-radius: 15px;
     display: inline-block;
@@ -136,7 +136,10 @@ e{
 }
 
 .resetButton {
-    font-size: x-large;
-    width: 170px;
-    height: 50px;
+    font: Arial, Helvetica, sans-serif;
+    color: rgb(133, 35, 35);
+    font-size: large;
+    font-weight: bold;
+    width: 150px;
+    height: 40px;
 }
