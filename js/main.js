@@ -170,7 +170,7 @@ function getData(map) {
                     return {
                         fillColor: "none",
                         color: "purple",
-                        weight: 3,
+                        weight: 4,
                         className: 'huc8Class'
                     }
                 }
@@ -195,7 +195,7 @@ function getData(map) {
             });
         })
 
-
+/*
     fetch("data/streamsHuc.json")
         .then(function (response) {
             return response.json();
@@ -227,7 +227,7 @@ function getData(map) {
                 }
             });
         })
-
+*/
 
 
     fetch("data/greatLakes.json")
@@ -241,7 +241,7 @@ function getData(map) {
                     return {
                         fillColor: "green",
                         color: "black",
-                        weight: 5,
+                        weight: 6,
                         fillOpacity: 0.1,
                         className: 'greatLakesClass'
                     }
@@ -260,7 +260,7 @@ function getData(map) {
                     return {
                         fillColor: "purple",
                         color: "black",
-                        weight: 5,
+                        weight: 6,
                         fillOpacity: 0.1,
                         className: 'mississippiClass'
                     }
@@ -339,9 +339,9 @@ function getData(map) {
 
     function resetHighlight(e) {
         huc10.setStyle({
-            weight: 1,
+            weight: 1.5,
             opacity: 1,
-            color: '#045a8d',
+            color: '#f09e20',
         })
         info.update();
     }
@@ -363,10 +363,11 @@ function getData(map) {
                 console.log(streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
         }
         
-
         huc8.addTo(map);
         huc10.bringToFront();
         document.getElementById("huc8box").checked = true;
+
+        //add popup here with the console log statement above (line 363) in the pop-up, there will be multiple lines for most hucs I think
     }
 
     map.on('zoomend', function () {
@@ -512,9 +513,9 @@ function updateColor(d) {
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.STREAM_ORD),
-        weight: 1,
+        weight: 1.5,
         opacity: 1,
-        color: '#045a8d',
+        color: '#f09e20',
         fillOpacity: 0.3
     };
 }
