@@ -22,6 +22,12 @@ Data:
     
     streamsPerHuc10.json
     - HUC10_Name = HUC 10 Name, each feature contains all the streams in each HUC 10
+
+Supporting Info:
+
+    - Hydrologic Unit Codes (HUCs) Explained: https://nas.er.usgs.gov/hucs.aspx
+    - Federal Standards and Procedures for the National Watershed Boundary Dataset (WBD): https://pubs.usgs.gov/tm/11/a3/
+
     
         
     
@@ -89,6 +95,7 @@ Data:
 ![Wisconsin Aquifers Page Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/5.AllAquiferInfo.jpg "Wisconsin Aquifers")
 -
 ![Wisconsin Watersheds Wireframe](https://github.com/mwimh/Spring2023_SourceToSink/blob/main/img/6.AllWatershedInfo.jpg "Wisconsin Watersheds")
+
 
 
 
