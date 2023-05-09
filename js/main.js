@@ -60,7 +60,7 @@ function geoCoder(map) {
     var geocoderControl = geocoder.getContainer();
     geocoderControl.style.backgroundColor = '#74a9cf';
     geocoderControl.querySelector('input').style.color = 'white';
-    geocoderControl.querySelector('input::placeholder').style.color = 'red';
+    
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
