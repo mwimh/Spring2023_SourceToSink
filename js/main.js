@@ -256,11 +256,11 @@ function getData(map) {
     };
 
     info.update = function (props) {
-        const contents = props ? `<b>HUC10 Name:</b> ${props.HUC10_NAME}
+        const contents = props ? `<h6><b>HUC10 Name:</b> ${props.HUC10_NAME}
                 <br/><b>HUC8 Name: </b>${props.HUC8_NAME}
                 <br/><b>River Basin: </b>${props.RiverBasin}
                 <br/><b>Flow Destination: </b>${props.FlowDest}`
-            : 'Hover over a Watershed';
+            : 'Hover over a Watershed</h6>';
         this._div.innerHTML = `<h4>Watershed Information</h4>${contents}`;
     };
 
