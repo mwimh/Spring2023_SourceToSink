@@ -68,17 +68,17 @@ function createMap() {
     getData(map);
     checkboxes(map);
 
-    
+
 
     var geocoder = L.Control.geocoder().addTo(map);
 
-    geocoder.on('markgeocode', function(event) {
+    geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
         console.log(latlng.lat, latlng.lng);
 
-        return(latlng.lat, latlng.lng);
+        return (latlng.lat, latlng.lng);
     })
-    
+
 
 };
 
@@ -91,7 +91,7 @@ function selectFeatureFromGEOJSON(latlng, huc10) {
 }
 
 
-function processData(data){
+function processData(data) {
     //empty array to hold attributes
     var attributes = [];
 
@@ -130,7 +130,7 @@ function getData(map) {
                     }
                 }
             });
-        onEachFeature(json)
+            onEachFeature(json)
         })
 
 
@@ -141,7 +141,9 @@ function getData(map) {
         // Call functions to create the map data
         .then(function (json) {
             huc10 = new L.geoJson(json, {
-                style: function (feature) {
+                style: style})
+                
+                /*function (feature) {
                     return {
                         fillColor: "white",
                         color: "orange",
@@ -150,7 +152,7 @@ function getData(map) {
                         className: 'huc10Class'
                     }
                 }
-            });
+            });*/
         })
 
     fetch("data/huc8.json")
@@ -309,6 +311,47 @@ function UncheckAll() {
         }
     }
 }
+
+
+function onEachFeature(feature, layer) {
+    //no property named popupContent; instead, create html string with all properties
+    var popupContent = "";
+    if (feature.properties) {
+        //loop to add feature property names and values to html string
+        for (var property in feature.properties) {
+            popupContent += "<p>" + property + ": " + feature.properties[property] + "</p>";
+            console.log(popupContent)
+        }
+        layer.bindPopup(popupContent);
+    };
+};
+
+function getColor(d) {
+    var colorArray = [
+        '#f7f7f7',
+        '#cccccc',
+        '#969696',
+        '#636363',
+        '#252525']
+    return d > 5 ? colorArray[4] :
+        d > 4 ? colorArray[3] :
+            d > 3 ? colorArray[2] :
+                d > 2 ? colorArray[1] :
+                    d > 1 ? colorArray[0] :
+                        '#ffffff';
+}
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.STREAM_ORD),
+        weight: 1,
+        opacity: 1,
+        color: 'orange',
+        fillOpacity: 0.3
+    };
+}
+
+
 
 /*function highlightFeature(e) {
     var layer = e.target;
