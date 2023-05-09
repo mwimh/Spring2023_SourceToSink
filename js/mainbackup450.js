@@ -66,7 +66,6 @@ function geoCoder(map) {
         var latlng = event.geocode.center;
         //console.log(latlng.lat, latlng.lng);
         latLng = [latlng.lat, latlng.lng]
-        //return (latlng.lat, latlng.lng);
         geoPip();
     })
 
@@ -96,7 +95,7 @@ info.addTo(map)*/
 function selectFeatureFromGEOJSON(latlng, huc10) {
     var latlng = (latlng.lat, latlng.lng);
     var selectedFeature = null;
-    console.log(latlng);
+    //console.log(latlng);
 
 
 }
@@ -117,7 +116,7 @@ function processData(data) {
     };*/
 
     //check result
-    console.log(attributes);
+    //console.log(attributes);
 
     return attributes;
 };
@@ -359,15 +358,21 @@ function getData(map) {
         });
 
         for (var item in streamRels) {
-            if (hucName == streamRels[item].src_HUC10_NAME)
+            if (hucName == streamRels[item].src_HUC10_NAME) {
                 console.log(streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
+            }
         }
-        
-
         huc8.addTo(map);
         huc10.bringToFront();
         document.getElementById("huc8box").checked = true;
+    }
 
+    function geoPip() {
+        for (var item in huc10) {
+            if (item.contains(latLng)) {
+                zoomToFeature;
+            }
+        }
     }
 
 
@@ -458,14 +463,6 @@ function checkboxes(map) {
         position: 'bottomright'
     }).addTo(map);
 
-}
-
-function geoPip() {
-    for (var item in huc10) {
-        if (item.contains(latLng)) {
-            zoomToFeature;
-        }
-    }
 }
 
 function UncheckAll() {
