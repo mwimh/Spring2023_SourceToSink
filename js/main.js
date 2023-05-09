@@ -146,8 +146,8 @@ function getData(map) {
 		layer.setStyle({
 			weight: 5,
 			color: '#666',
-			dashArray: '',
-			fillOpacity: 0.7
+			//dashArray: '',
+			//fillOpacity: 0.7
 		});
 
 		layer.bringToFront();
@@ -285,20 +285,25 @@ function checkboxes(map) {
             if (box.checked) {
                 if (box.value == "cities") {
                     cities.addTo(map);
+                    huc10.bringToFront();
                 }
                 if (box.value == "huc10") {
                     huc10.addTo(map);
+                    huc10.bringToFront();
                 }
                 if (box.value == "huc8") {
                     huc8.addTo(map);
+                    huc10.bringToFront();
                 }
                 if (box.value == "rivers") {
                     rivers.addTo(map);
+                    huc10.bringToFront();
                 }
                 if (box.value == "divides") {
                     mississippi.addTo(map);
                     greatLakes.addTo(map);
                     stateDivide.addTo(map);
+                    huc10.bringToFront();
                 }
 
             }
