@@ -59,7 +59,6 @@ function createMap() {
     var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
         maxZoom: 12,
         minZoom: 7,
-        zoomControl: false,
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
 
@@ -70,7 +69,7 @@ function createMap() {
 
 
 
-    var geocoder = L.Control.geocoder().addTo(map);
+    var geocoder = L.Control.geocoder({iconlabel:'New Search', showUniqueResult:true, collapsed:false, placeholder:'Enter a Location'}).addTo(map);
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
@@ -78,8 +77,7 @@ function createMap() {
 
         return (latlng.lat, latlng.lng);
     })
-
-
+    
 };
 
 function selectFeatureFromGEOJSON(latlng, huc10) {
@@ -286,6 +284,8 @@ function checkboxes(map) {
     })
 
     UncheckAll();
+
+    map.removeControl(map.zoomControl);
 
     L.control.zoom({
         position: 'bottomright'
