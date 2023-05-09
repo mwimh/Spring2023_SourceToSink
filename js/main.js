@@ -168,7 +168,7 @@ function getData(map) {
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
-			click: zoomToFeature
+			//click: zoomToFeature
 		});
 	}
 
