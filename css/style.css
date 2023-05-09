@@ -61,6 +61,8 @@ e{
     padding: 5px 0;
 }
 
+e:hover{cursor: pointer; box-shadow:inset 1px 1px 1px 1px rgb(255, 255, 255); background-color: #74a9cf; color: #045a8d; text-shadow: .75px .75px #3f3f3fa4}
+
 #title-bar {
     width: 100;
     height: 80px;
@@ -87,7 +89,7 @@ e{
 #left-panel{
     width: fit-content;
     height: 400px;
-    background-image: linear-gradient(305deg, #bdc9e1, #74a9cf, #045a8d);
+    background-image: linear-gradient(165deg, #bdc9e1, #74a9cf, #045a8d);
     border-radius: 15px;
     display: inline-block;
     padding: 20px;
@@ -156,8 +158,11 @@ e{
     color: white;
     font-size: large;
     font-weight: bold;
-    width: 150px;
+    width: 750px;
     height: 40px;
 }
 
-a, a:hover, a:active, a:visited { color: white; }
+.resetButton:hover{ cursor: pointer; box-shadow:inset 1px 1px 1px 1px rgb(255, 255, 255); background-color: #74a9cf; color: #045a8d; text-shadow: .75px .75px #3f3f3fa4 }
+
+a, a:active, a:visited { color: #045a8d }
+a:hover { color: #74a9cf; text-shadow: .75px .75px #3f3f3fa4 }
