@@ -20,6 +20,7 @@
     display: none;
     z-index: 10000000;
     color: #045b8d;
+    text-shadow: 0.75px 0.75px #ffffff;
 }
 
 #letsGo{
