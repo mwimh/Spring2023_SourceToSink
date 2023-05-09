@@ -64,7 +64,7 @@ e{
 #title-bar {
     width: 100;
     height: 80px;
-    background-image: linear-gradient(135deg, #bdc9e1, #74a9cf, #045a8d);
+    background-image: linear-gradient(135deg, #bdc9e1c5, #74a9cfc7, #045b8dc5), url('https://i.pinimg.com/736x/09/7a/3e/097a3e9e79e846ac27e89e36a38ea80f.jpg');
     border-radius: 15px;
     margin-bottom: 0px;
     margin-left: 10px;
@@ -131,8 +131,8 @@ e{
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     border-radius: 5px;
     width: 400px;
-    height: 160px;
-    bottom: 265px;
+    height: 170px;
+    bottom: 255px;
     left: 1px;
 }
 
