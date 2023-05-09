@@ -360,8 +360,10 @@ function getData(map) {
 
         for (var item in streamRels) {
             if (hucName == streamRels[item].src_HUC10_NAME)
-                console.log(streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
-        }
+                var statement = (streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
+                console.log(statement);
+                e.target.bindPopup(statement).openPopup();
+            }
         
         huc8.addTo(map);
         huc10.bringToFront();
