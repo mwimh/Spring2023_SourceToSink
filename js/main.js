@@ -54,7 +54,7 @@ function createMap() {
 
 function geoCoder(map) {
 
-    var geocoder = L.Control.geocoder({ iconlabel: 'New Search', showUniqueResult: true, collapsed: false, placeholder: 'Enter a Location' }).addTo(map);
+    var geocoder = L.Control.geocoder({ iconlabel: 'New Search', showUniqueResult: true, collapsed: false, placeholder: ' Enter a Location' }).addTo(map);
 
     // Add CSS style to the geocoder control element
     var geocoderControl = geocoder.getContainer();
