@@ -1,10 +1,8 @@
-//insert code here!
-//declare map variable globally so all functions have access
-
-//var minValue;
-//var dataStats = {};
 var map;
+var cities, rivers, huc8, huc10, geojson;
 
+
+//initial popup window
 window.addEventListener("load", function () {
     this.setTimeout(
         function open(event) {
@@ -22,39 +20,10 @@ document.querySelector("#letsGo").addEventListener("click", function () {
     document.querySelector(".popup").style.display = "none";
 });
 
-//
-var cities, rivers, huc8, huc10, geojson;
 
-L.TopoJSON = L.GeoJSON.extend({
-    addData: function (jsonData) {
-        if (jsonData.type === 'Topology') {
-            for (key in jsonData.objects) {
-                geojson = topojson.feature(jsonData, jsonData.objects[key]);
-                L.GeoJSON.prototype.addData.call(this, geojson);
-            }
-        }
-        else {
-            L.GeoJSON.prototype.addData.call(this, jsonData);
-        }
-    }
-});
-
+//create map
 function createMap() {
     var map = L.map('map').setView([44.75, -90], 8);
-
-    //map boundaries
-    var northW = L.latLng(49, -96);
-    southE = L.latLng(40, -84);
-    var bounds = L.latLngBounds(northW, southE);
-
-    map.setMaxBounds(bounds);
-    map.on('drag', function () {
-        map.panInsideBounds(bounds, {
-            animate: false
-        });
-    });
-
-    var map = map
 
     var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
         maxZoom: 12,
@@ -62,12 +31,28 @@ function createMap() {
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
 
+    //set map boundaries
+    var northW = L.latLng(49, -96);
+    southE = L.latLng(40, -84);
+    var bounds = L.latLngBounds(northW, southE);
+    map.setMaxBounds(bounds);
+    map.on('drag', function () {
+        map.panInsideBounds(bounds, {
+            animate: false
+        });
+    });
 
-    //call getData function*/
+    //call functions
     getData(map);
     checkboxes(map);
+    geoCoder(map);
 
+};
 
+//================================================================================================================
+//add geocoder search function
+
+function geoCoder(map) {
 
     var geocoder = L.Control.geocoder({iconlabel:'New Search', showUniqueResult:true, collapsed:false, placeholder:'Enter a Location'}).addTo(map);
 
@@ -77,8 +62,11 @@ function createMap() {
 
         return (latlng.lat, latlng.lng);
     })
-    
-};
+
+}
+
+//================================================================================================================
+//add hover function
 
 /*// control that shows state info on hover
 const info = L.control();
@@ -104,7 +92,6 @@ function selectFeatureFromGEOJSON(latlng, huc10) {
 
 }
 
-
 function processData(data) {
     //empty array to hold attributes
     var attributes = [];
@@ -125,6 +112,9 @@ function processData(data) {
 
     return attributes;
 };
+
+//================================================================================================================
+//Process geojsons
 
 // Load and convert geojson data to be used
 function getData(map) {
@@ -300,6 +290,9 @@ function getData(map) {
 
 };
 
+//================================================================================================================
+//add layers via checkbox
+
 function checkboxes(map) {
     document.querySelectorAll(".checkbox").forEach(function (box) {
         box.addEventListener("change", function () {
@@ -370,7 +363,6 @@ function UncheckAll() {
     }
     document.getElementById("huc10box").checked = true;
 }
-
 
 //============================================================================================
 //functions to set and update fill colors of HUC10s
