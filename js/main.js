@@ -247,7 +247,7 @@ function getData(map) {
             });
         })
 
-    const info = L.control();
+    const info = L.control({position: 'bottomleft'});
 
     info.onAdd = function (map) {
         this._div = L.DomUtil.create('div', 'info');
