@@ -60,7 +60,7 @@ function geoCoder(map) {
     var geocoderControl = geocoder.getContainer();
     geocoderControl.style.backgroundColor = '#74a9cf';
     geocoderControl.querySelector('input').style.color = 'white';
-    
+
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
@@ -286,9 +286,8 @@ function getData(map) {
     }
 
     function zoomToFeature(e) {
-        //zbound = e.target
-        console.log(e.target.feature.properties.HUC8_NAME)
-        map.fitBounds(e.target.getBounds());
+        huc10Center = e.target.getBounds().getCenter();
+        map.flyTo(huc10Center, 10.5);
     }
 
     map.on('zoomend', function () {

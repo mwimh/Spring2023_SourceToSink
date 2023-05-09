@@ -1,5 +1,5 @@
 var map;
-var cities, rivers, huc8, huc10, geojson;
+var cities, rivers, huc8, huc10, geojson, streamRels;
 
 
 //initial popup window
@@ -37,6 +37,7 @@ function createMap() {
     var bounds = L.latLngBounds(northW, southE);
     map.setMaxBounds(bounds);
     map.on('drag', function () {
+
         map.panInsideBounds(bounds, {
             animate: false
         });
@@ -58,7 +59,7 @@ function geoCoder(map) {
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
-        console.log(latlng.lat, latlng.lng);
+        //console.log(latlng.lat, latlng.lng);
 
         return (latlng.lat, latlng.lng);
     })
@@ -87,7 +88,7 @@ info.addTo(map)*/
 function selectFeatureFromGEOJSON(latlng, huc10) {
     var latlng = (latlng.lat, latlng.lng);
     var selectedFeature = null;
-    console.log(latlng);
+    //console.log(latlng);
 
 
 }
@@ -108,7 +109,7 @@ function processData(data) {
     };*/
 
     //check result
-    console.log(attributes);
+    //console.log(attributes);
 
     return attributes;
 };
@@ -241,6 +242,31 @@ function getData(map) {
             });
         })
 
+
+// Build an attributes array from the data
+function processData(data) {
+    // Create an empty array to hold attributes
+    var attributes = [];
+    // Properties of the first feature in the dataset
+    var properties = data.features[0].properties;
+    // Push each attribute name into attributes array
+    for (var attribute in properties) {
+        // Only take attributes with actual values
+        if (attribute.indexOf("ind") > -1) {
+            attributes.push(attribute);
+        };
+    };
+    return attributes;
+};
+
+    fetch("data/streamRels.json")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (json) {
+            streamRels = processData(json)
+        })
+
     const info = L.control();
 
     info.onAdd = function (map) {
@@ -276,30 +302,38 @@ function getData(map) {
     }
 
     function zoomToFeature(e) {
-        map.fitBounds(e.target.getBounds());
+        //relates = ""
+        huc10Center = e.target.getBounds().getCenter();
+        huc8Name = e.target.feature.properties.HUC8_NAME
+        hucName = e.target.feature.properties.HUC10_NAME
+        map.flyTo(huc10Center, 10.5);
+        console.log(streamRels)
     }
 
     map.on('zoomend', function () {
-        if (map.getZoom() > 10 && map.hasLayer(rivers) == false) {
+        if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {
             map.addLayer(rivers);
             document.getElementById("riverbox").checked = true;
         }
-        if (map.getZoom() < 11 && map.hasLayer(rivers)) {
+        if (map.getZoom() < 10.5 && map.hasLayer(rivers)) {
             map.removeLayer(rivers);
             document.getElementById("riverbox").checked = false;
         }
     });
 
+
+
     function onEachFeature(feature, layer) {
         layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,
-            click: zoomToFeature
+            click: zoomToFeature,
         });
     }
 
 
-    
+
+
 };
 
 //================================================================================================================
