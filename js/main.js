@@ -54,7 +54,7 @@ function createMap() {
 
 function geoCoder(map) {
 
-    var geocoder = L.Control.geocoder({iconlabel:'New Search', showUniqueResult:true, collapsed:false, placeholder:'Enter a Location'}).addTo(map);
+    var geocoder = L.Control.geocoder({ iconlabel: 'New Search', showUniqueResult: true, collapsed: false, placeholder: 'Enter a Location' }).addTo(map);
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
@@ -113,6 +113,7 @@ function processData(data) {
     return attributes;
 };
 
+
 //================================================================================================================
 //Process geojsons
 
@@ -135,53 +136,6 @@ function getData(map) {
                 }
             });
         })
-
-    const info = L.control();
-
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-
-    info.update = function (props) {
-        const contents = props ? `<b>${props.name}</b><br/>${props.density} people / mi<sup>2</sup>` : 'Hover over a Watershed';
-        this._div.innerHTML = `<h4>HUC Information</h4>${contents}`;
-    };
-
-    info.addTo(map)
-
-	function highlightFeature(e) {
-		const layer = e.target;
-
-		layer.setStyle({
-			weight: 5,
-			color: '#666',
-			//dashArray: '',
-			//fillOpacity: 0.7
-		});
-
-		layer.bringToFront();
-
-		info.update(layer.feature.properties);
-	}
-
-    function resetHighlight(e) {
-		geojson.resetStyle(e.target);
-		info.update();
-	}
-
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-	}
 
     fetch("data/huc10.json")
         .then(function (response) {
@@ -231,7 +185,6 @@ function getData(map) {
                 }
             });
         })
-
 
     fetch("data/greatLakes.json")
         .then(function (response) {
@@ -287,6 +240,53 @@ function getData(map) {
                 }
             });
         })
+
+
+    const info = L.control();
+
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+
+    info.update = function (props) {
+        const contents = props ? `<b>${props.name}</b><br/>${props.density} people / mi<sup>2</sup>` : 'Hover over a Watershed';
+        this._div.innerHTML = `<h4>HUC Information</h4>${contents}`;
+    };
+
+    info.addTo(map)
+
+//================================================================================================================
+//highlight, dehighlight, and zoom to feature
+
+    function highlightFeature(e) {
+        const layer = e.target;
+
+        layer.setStyle({
+            weight: 5,
+            color: '#eaa40e',
+        });
+
+        info.update(layer.feature.properties);
+    }
+
+    function resetHighlight(e) {
+        huc10.resetStyle(e.target);
+        info.update();
+    }
+
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: zoomToFeature
+        });
+    }
 
 };
 
