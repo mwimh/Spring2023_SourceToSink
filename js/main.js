@@ -257,8 +257,8 @@ function getData(map) {
 
     info.addTo(map)
 
-//================================================================================================================
-//highlight, dehighlight, and zoom to feature
+    //================================================================================================================
+    //highlight, dehighlight, and zoom to feature
 
     function highlightFeature(e) {
         const layer = e.target;
@@ -279,6 +279,17 @@ function getData(map) {
     function zoomToFeature(e) {
         map.fitBounds(e.target.getBounds());
     }
+
+    map.on('zoomend', function () {
+        if (map.getZoom() > 10 && map.hasLayer(rivers) == false) {
+            map.addLayer(rivers);
+            document.getElementById("riverbox").checked = true;
+        }
+        if (map.getZoom() < 11 && map.hasLayer(rivers)) {
+            map.removeLayer(rivers);
+            document.getElementById("riverbox").checked = false;
+        }
+    });
 
     function onEachFeature(feature, layer) {
         layer.on({
