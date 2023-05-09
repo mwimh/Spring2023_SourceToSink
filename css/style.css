@@ -8,7 +8,7 @@
 }
 
 .popup{
-    background-image: linear-gradient(25deg, #045b8dad, #74a9cfb4, #74a9cfb4, #045b8dad), url('https://img.freepik.com/free-vector/topographic-contour-lines-map-seamless-pattern_1284-52862.jpg?w=826&t=st=1683657221~exp=1683657821~hmac=3af7503d1302ed544ee6a88dc611304ac08fed7bab3a60ea8dec2fa9962ce233');
+    background-image: linear-gradient(25deg, #045b8dcb, #74a9cfc9, #74a9cfc9, #045b8dcb), url('https://img.freepik.com/free-vector/topographic-contour-lines-map-seamless-pattern_1284-52862.jpg?w=826&t=st=1683657221~exp=1683657821~hmac=3af7503d1302ed544ee6a88dc611304ac08fed7bab3a60ea8dec2fa9962ce233');
     width: 750px;
     padding: 30px 40px;
     position: absolute;
@@ -20,6 +20,7 @@
     display: none;
     z-index: 10000000;
     color: #045b8d;
+    text-shadow: #ffffff 1px 0 9px;
 }
 
 #letsGo{
