@@ -276,8 +276,6 @@ function getData(map) {
     }
 
     function zoomToFeature(e) {
-        //zbound = e.target
-        console.log(e.target.feature.properties.HUC8_NAME)
         map.fitBounds(e.target.getBounds());
     }
 
@@ -300,6 +298,8 @@ function getData(map) {
         });
     }
 
+
+    
 };
 
 //================================================================================================================
