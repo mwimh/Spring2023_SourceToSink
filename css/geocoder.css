@@ -14,7 +14,10 @@
   .leaflet-control-geocoder a,
   .leaflet-control-geocoder .leaflet-control-geocoder-icon {
     border-bottom: none;
+    border: 2px solid #045a8d;
     display: inline-block;
+    background-color:white;
+    
   }
   
   .leaflet-control-geocoder .leaflet-control-geocoder-alternatives a {
@@ -125,4 +128,8 @@
   }
   .leaflet-control-geocoder-address-context {
     color: #666;
+  }
+
+  .leaflet-control-geocoder input::placeholder {
+    color: white;
   }
