@@ -247,7 +247,27 @@ function getData(map) {
             });
         })
 
-    const info = L.control({position: 'bottomleft'});
+
+    // Build an attributes array from the data
+    function processData(data) {
+        var attributes = [];
+        //var properties = data.features[0].properties;
+        for (var item in data.features) {
+            attributes.push(data.features[item].properties)
+        }
+        return attributes;
+    };
+
+    fetch("data/streamRels.json")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (json) {
+            streamRels = processData(json)
+            //console.log(streamRels[0].src_HUC10_NAME)
+        })
+
+    const info = L.control({ position: 'bottomleft' });
 
     info.onAdd = function (map) {
         this._div = L.DomUtil.create('div', 'info');
@@ -281,14 +301,40 @@ function getData(map) {
     }
 
     function resetHighlight(e) {
-        huc10.resetStyle(e.target);
+        //huc10.resetStyle(e.target);
+        huc10.setStyle({
+            weight: 1,
+            opacity: 1,
+            color: '#045a8d',
+        })
         info.update();
     }
 
     function zoomToFeature(e) {
+        
+        huc10.resetStyle();
+
         huc10Center = e.target.getBounds().getCenter();
         map.flyTo(huc10Center, 10.5);
+
+        hucName = e.target.feature.properties.HUC10_NAME
+
+        e.target.setStyle({
+            fillColor: "blue",
+        });
+
+        for (var item in streamRels) {
+            if (hucName == streamRels[item].src_HUC10_NAME)
+                console.log(streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
+
+        }
+        
+        huc8.addTo(map);
+        huc10.bringToFront();
+        document.getElementById("huc8box").checked = true;
+
     }
+
 
     map.on('zoomend', function () {
         if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {

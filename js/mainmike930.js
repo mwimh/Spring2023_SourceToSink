@@ -253,8 +253,6 @@ function getData(map) {
         return attributes;
     };
 
-
-
     fetch("data/streamRels.json")
         .then(function (response) {
             return response.json();
@@ -307,7 +305,6 @@ function getData(map) {
 
     function zoomToFeature(e) {
 
-        //console.log(lastHuc)
         huc10Center = e.target.getBounds().getCenter();
         map.flyTo(huc10Center, 10.5);
 
@@ -315,7 +312,7 @@ function getData(map) {
 
         for (var item in streamRels) {
             if (hucName == streamRels[item].src_HUC10_NAME)
-                //console.log(streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
+                console.log(streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
                 e.target.setStyle({
                     fillColor: "blue",
                 });
@@ -333,9 +330,6 @@ function getData(map) {
             })
             lastHuc = e.target.feature.properties.HUC10_NAME
         }
-
-        //lastHuc = e.target.feature.properties.HUC10_NAME
-
     }
 
     map.on('zoomend', function () {
