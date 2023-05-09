@@ -243,21 +243,17 @@ function getData(map) {
         })
 
 
-// Build an attributes array from the data
-function processData(data) {
-    // Create an empty array to hold attributes
-    var attributes = [];
-    // Properties of the first feature in the dataset
-    var properties = data.features[0].properties;
-    // Push each attribute name into attributes array
-    for (var attribute in properties) {
-        // Only take attributes with actual values
-        if (attribute.indexOf("ind") > -1) {
+    // Build an attributes array from the data
+    function processData(data) {
+        var attributes = [];
+        var properties = data.features[0].properties;
+        for (var attribute in properties) {
             attributes.push(attribute);
         };
+        return attributes;
     };
-    return attributes;
-};
+
+    
 
     fetch("data/streamRels.json")
         .then(function (response) {
@@ -265,6 +261,7 @@ function processData(data) {
         })
         .then(function (json) {
             streamRels = processData(json)
+            console.log(streamRels)
         })
 
     const info = L.control();
@@ -307,7 +304,7 @@ function processData(data) {
         huc8Name = e.target.feature.properties.HUC8_NAME
         hucName = e.target.feature.properties.HUC10_NAME
         map.flyTo(huc10Center, 10.5);
-        console.log(streamRels)
+        //console.log(streamRels)
     }
 
     map.on('zoomend', function () {
