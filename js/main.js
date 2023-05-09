@@ -150,6 +150,7 @@ function getData(map) {
             huc10 = new L.geoJson(json, {
                 style: styleHuc
             })
+            huc10.addTo(map);
         })
 
     fetch("data/huc8.json")
@@ -309,6 +310,7 @@ function UncheckAll() {
             w[i].checked = false;
         }
     }
+    document.getElementById("huc10box").checked = true;
 }
 
 
@@ -365,6 +367,22 @@ function updateStyle(feature) {
     };
 }
 //======================================================================================
+
+function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#777',
+        fillOpacity: 0.7
+    });
+
+    layer.bringToFront();
+}
+
+function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+}
 
 
 
