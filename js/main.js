@@ -423,7 +423,7 @@ function style(feature) {
         fillColor: getColor(feature.properties.STREAM_ORD),
         weight: 1,
         opacity: 1,
-        color: 'orange',
+        color: '#045a8d',
         fillOpacity: 0.2
     };
 }
@@ -433,7 +433,7 @@ function updateStyle(feature) {
         fillColor: getColor(feature.properties.STREAM_ORD),
         weight: 1,
         opacity: 1,
-        color: 'orange',
+        color: '#045a8d',
         fillOpacity: 0.2
     };
 }

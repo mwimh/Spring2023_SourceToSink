@@ -97,7 +97,7 @@ e{
     margin-left: 10px;
     margin-right: 10px;
     position: absolute;
-    top: 83px;
+    top: 90px;
     z-index: 10;
 }
 
@@ -108,6 +108,7 @@ e{
     margin-right: 10px;
     border-radius: 15px;
     z-index: 1;
+    margin-top: 7px;
 }
 
 .huc10class {
@@ -150,8 +151,9 @@ e{
 }
 
 .resetButton {
-    font: Arial, Helvetica, sans-serif;
-    color: rgb(133, 35, 35);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #045a8d;
+    color: white;
     font-size: large;
     font-weight: bold;
     width: 150px;

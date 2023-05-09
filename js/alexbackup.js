@@ -169,8 +169,8 @@ function getData(map) {
 		const layer = e.target;
 
 		layer.setStyle({
-			weight: 5,
-			color: '#666',
+			weight: 50,
+			//color: 'blue',
 		});
 
 		layer.bringToFront();
