@@ -8,7 +8,7 @@
 }
 
 .popup{
-    background-image: linear-gradient(25deg, #045a8d, #74a9cf, #adc8fd, #74a9cf, #045a8d);
+    background-image: linear-gradient(25deg, #045a8d, #74a9cf, #74a9cf, #045a8d);
     width: 750px;
     padding: 30px 40px;
     position: absolute;
