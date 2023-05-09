@@ -130,7 +130,7 @@ function getData(map) {
             });
         })
 
-    function styleHuc(feature) {
+   /* function styleHuc(feature) {
         return {
             fillColor: 'blue',
             weight: 2,
@@ -138,7 +138,7 @@ function getData(map) {
             color: 'orange',
             fillOpacity: 0.7
         };
-    }
+    }*/
 
 	function highlightFeature(e) {
 		const layer = e.target;
@@ -179,7 +179,7 @@ function getData(map) {
         // Call functions to create the map data
         .then(function (json) {
             huc10 = new L.geoJson(json, {
-                style: styleHuc,
+                style: style,
                 onEachFeature
             })
             huc10.addTo(map);
