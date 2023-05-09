@@ -160,9 +160,9 @@ function getData(map) {
 		info.update();
 	}
 
-	function zoomToFeature(e) {
+	/*function zoomToFeature(e) {
 		map.fitBounds(e.target.getBounds());
-	}
+	}*/
 
 	function onEachFeature(feature, layer) {
 		layer.on({
@@ -400,22 +400,6 @@ function updateStyle(feature) {
 }
 //======================================================================================
 
-function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#777',
-        fillOpacity: 0.7
-    });
-
-    layer.bringToFront();
-}
-
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-}
-
 
 
 /*
@@ -427,5 +411,7 @@ On selection of point on map or input of address:
 5. Highlight main river channel in river basin dark blue (by river system name)
 6. Highlight channels in upstream HUCs in light blue
 */
+
+//map.attributionControl.addAttribution('Shapefile data &copy; <a href="https://data-wi-dnr.opendata.arcgis.com/">WI DNR GIS Portal</a>');
 
 document.addEventListener('DOMContentLoaded', createMap)
