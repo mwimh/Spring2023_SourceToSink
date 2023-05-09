@@ -1,8 +1,10 @@
+//insert code here!
+//declare map variable globally so all functions have access
+
+//var minValue;
+//var dataStats = {};
 var map;
-var cities, rivers, huc8, huc10, geojson;
 
-
-//initial popup window
 window.addEventListener("load", function () {
     this.setTimeout(
         function open(event) {
@@ -20,21 +22,31 @@ document.querySelector("#letsGo").addEventListener("click", function () {
     document.querySelector(".popup").style.display = "none";
 });
 
+//
+var cities, rivers, huc8, huc10, geojson;
 
-//create map
+L.TopoJSON = L.GeoJSON.extend({
+    addData: function (jsonData) {
+        if (jsonData.type === 'Topology') {
+            for (key in jsonData.objects) {
+                geojson = topojson.feature(jsonData, jsonData.objects[key]);
+                L.GeoJSON.prototype.addData.call(this, geojson);
+            }
+        }
+        else {
+            L.GeoJSON.prototype.addData.call(this, jsonData);
+        }
+    }
+});
+
 function createMap() {
     var map = L.map('map').setView([44.75, -90], 8);
 
-    var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-        maxZoom: 12,
-        minZoom: 7,
-        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    //set map boundaries
+    //map boundaries
     var northW = L.latLng(49, -96);
     southE = L.latLng(40, -84);
     var bounds = L.latLngBounds(northW, southE);
+
     map.setMaxBounds(bounds);
     map.on('drag', function () {
         map.panInsideBounds(bounds, {
@@ -42,19 +54,22 @@ function createMap() {
         });
     });
 
-    //call functions
+    var map = map
+
+    var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+        maxZoom: 12,
+        minZoom: 7,
+        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+
+    //call getData function*/
     getData(map);
     checkboxes(map);
-    geoCoder(map);
 
-};
 
-//================================================================================================================
-//add geocoder search function
 
-function geoCoder(map) {
-
-    var geocoder = L.Control.geocoder({ iconlabel: 'New Search', showUniqueResult: true, collapsed: false, placeholder: 'Enter a Location' }).addTo(map);
+    var geocoder = L.Control.geocoder({iconlabel:'New Search', showUniqueResult:true, collapsed:false, placeholder:'Enter a Location'}).addTo(map);
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
@@ -62,11 +77,8 @@ function geoCoder(map) {
 
         return (latlng.lat, latlng.lng);
     })
-
-}
-
-//================================================================================================================
-//add hover function
+    
+};
 
 /*// control that shows state info on hover
 const info = L.control();
@@ -92,6 +104,7 @@ function selectFeatureFromGEOJSON(latlng, huc10) {
 
 }
 
+
 function processData(data) {
     //empty array to hold attributes
     var attributes = [];
@@ -112,10 +125,6 @@ function processData(data) {
 
     return attributes;
 };
-
-
-//================================================================================================================
-//Process geojsons
 
 // Load and convert geojson data to be used
 function getData(map) {
@@ -235,6 +244,7 @@ function getData(map) {
             });
         })
 
+
     fetch("data/greatLakes.json")
         .then(function (response) {
             return response.json();
@@ -290,68 +300,7 @@ function getData(map) {
             });
         })
 
-
-    const info = L.control();
-
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-
-    info.update = function (props) {
-        const contents = props ? `<b>${props.name}</b><br/>${props.density} people / mi<sup>2</sup>` : 'Hover over a Watershed';
-        this._div.innerHTML = `<h4>HUC Information</h4>${contents}`;
-    };
-
-    info.addTo(map)
-
-    //================================================================================================================
-    //highlight, dehighlight, and zoom to feature
-
-    function highlightFeature(e) {
-        const layer = e.target;
-
-        layer.setStyle({
-            weight: 5,
-            color: '#eaa40e',
-        });
-
-        info.update(layer.feature.properties);
-    }
-
-    function resetHighlight(e) {
-        huc10.resetStyle(e.target);
-        info.update();
-    }
-
-    function zoomToFeature(e) {
-        map.fitBounds(e.target.getBounds());
-    }
-
-    map.on('zoomend', function () {
-        if (map.getZoom() > 10 && map.hasLayer(rivers) == false) {
-            map.addLayer(rivers);
-            document.getElementById("riverbox").checked = true;
-        }
-        if (map.getZoom() < 11 && map.hasLayer(rivers)) {
-            map.removeLayer(rivers);
-            document.getElementById("riverbox").checked = false;
-        }
-    });
-
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: zoomToFeature
-        });
-    }
-
 };
-
-//================================================================================================================
-//add layers via checkbox
 
 function checkboxes(map) {
     document.querySelectorAll(".checkbox").forEach(function (box) {
@@ -423,6 +372,7 @@ function UncheckAll() {
     }
     document.getElementById("huc10box").checked = true;
 }
+
 
 //============================================================================================
 //functions to set and update fill colors of HUC10s
