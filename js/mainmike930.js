@@ -316,6 +316,7 @@ function getData(map) {
                 e.target.setStyle({
                     fillColor: "blue",
                 });
+                
         }
 
         if (lastHuc == undefined) {

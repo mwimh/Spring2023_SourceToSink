@@ -1,6 +1,6 @@
 var map;
-var cities, rivers, huc8, huc10, geojson;
-
+var cities, rivers, huc8, huc10, geojson, streamRels, streamsHuc, mainChannels;
+var latLng = [];
 
 //initial popup window
 window.addEventListener("load", function () {
@@ -64,10 +64,12 @@ function geoCoder(map) {
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
-        console.log(latlng.lat, latlng.lng);
-
-        return (latlng.lat, latlng.lng);
+        //console.log(latlng.lat, latlng.lng);
+        latLng = [latlng.lat, latlng.lng]
+        //return (latlng.lat, latlng.lng);
     })
+
+
 
 }
 
@@ -185,12 +187,47 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         color: "#3F97DD",
-                        weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD ** 0.65),
+                        weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD ** 0.35),
                         className: 'riversClass'
                     }
                 }
             });
         })
+
+
+    fetch("data/streamsHuc.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            streamsHuc = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        color: "#3f53f7",
+                        weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD ** 0.65),
+                    }
+                }
+            });
+        })
+
+    fetch("data/mainChannels.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            mainChannels = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        color: "#0c1fbd",
+                        weight: (feature.properties.STREAM_ORD + 5),
+                    }
+                }
+            });
+        })
+
+
 
     fetch("data/greatLakes.json")
         .then(function (response) {
@@ -301,7 +338,6 @@ function getData(map) {
     }
 
     function resetHighlight(e) {
-        //huc10.resetStyle(e.target);
         huc10.setStyle({
             weight: 1,
             opacity: 1,
@@ -311,9 +347,8 @@ function getData(map) {
     }
 
     function zoomToFeature(e) {
-        
-        huc10.resetStyle();
 
+        huc10.resetStyle();
         huc10Center = e.target.getBounds().getCenter();
         map.flyTo(huc10Center, 10.5);
 
@@ -323,16 +358,45 @@ function getData(map) {
             fillColor: "blue",
         });
 
+        console.log(e.target)
+        console.log(hucName)
+
         for (var item in streamRels) {
             if (hucName == streamRels[item].src_HUC10_NAME)
                 console.log(streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
 
+
+            /*
+        if (streamRels[item].UpDwn == 'U') {
+            huc10.HUC10_NAME.setStyle({
+                fillColor: "blue"
+            })
+        } else if (streamRels[item].UpDwn == 'D') {
+            huc10.HUC10_NAME.setStyle({
+                fillColor: "Red"
+            })
+        } else {
+            huc10.HUC10_NAME.setStyle({
+                fillColor: "white"
+            })
+        }*/
         }
-        
+
+
+
+        //var channel = mainChannels.feature[1].properties;
+        //console.log(huc10)
+        //console.log(e)
+        //console.log(mainChannels)
+        //console.log(streamsHuc)
+
+        //map.removeLayer(rivers);
+        //document.getElementById("riverbox").checked = false;
+        //map.addLayer(mainChannels);
+        //map.addLayer(streamsHuc);
         huc8.addTo(map);
         huc10.bringToFront();
         document.getElementById("huc8box").checked = true;
-
     }
 
 
@@ -342,9 +406,12 @@ function getData(map) {
             huc10.bringToFront();
             document.getElementById("riverbox").checked = true;
         }
-        if (map.getZoom() < 10.5 && map.hasLayer(rivers)) {
-            map.removeLayer(rivers);
-            document.getElementById("riverbox").checked = false;
+        if (map.getZoom() < 9.5 && map.hasLayer(rivers)) {
+            map.addLayer(stateDivide);
+            map.addLayer(mississippi);
+            map.addLayer(greatLakes);
+            huc10.bringToFront();
+            document.getElementById("dividebox").checked = true;
         }
     });
 
@@ -471,7 +538,7 @@ function style(feature) {
         weight: 1,
         opacity: 1,
         color: '#045a8d',
-        fillOpacity: 0.2
+        fillOpacity: 0.3
     };
 }
 
