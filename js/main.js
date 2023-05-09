@@ -60,7 +60,7 @@ function geoCoder(map) {
     var geocoderControl = geocoder.getContainer();
     geocoderControl.style.backgroundColor = '#74a9cf';
     geocoderControl.querySelector('input').style.color = 'white';
-    
+
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
@@ -286,17 +286,16 @@ function getData(map) {
     }
 
     function zoomToFeature(e) {
-        //zbound = e.target
-        console.log(e.target.feature.properties.HUC8_NAME)
-        map.fitBounds(e.target.getBounds());
+        huc10Center = e.target.getBounds().getCenter();
+        map.flyTo(huc10Center, 10.5);
     }
 
     map.on('zoomend', function () {
-        if (map.getZoom() > 10 && map.hasLayer(rivers) == false) {
+        if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {
             map.addLayer(rivers);
             document.getElementById("riverbox").checked = true;
         }
-        if (map.getZoom() < 11 && map.hasLayer(rivers)) {
+        if (map.getZoom() < 10.5 && map.hasLayer(rivers)) {
             map.removeLayer(rivers);
             document.getElementById("riverbox").checked = false;
         }
