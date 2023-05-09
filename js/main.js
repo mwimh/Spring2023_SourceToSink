@@ -141,18 +141,8 @@ function getData(map) {
         // Call functions to create the map data
         .then(function (json) {
             huc10 = new L.geoJson(json, {
-                style: style})
-                
-                /*function (feature) {
-                    return {
-                        fillColor: "white",
-                        color: "orange",
-                        fillOpacity: 0.4,
-                        weight: 1,
-                        className: 'huc10Class'
-                    }
-                }
-            });*/
+                style: style
+            })
         })
 
     fetch("data/huc8.json")
@@ -313,18 +303,8 @@ function UncheckAll() {
 }
 
 
-function onEachFeature(feature, layer) {
-    //no property named popupContent; instead, create html string with all properties
-    var popupContent = "";
-    if (feature.properties) {
-        //loop to add feature property names and values to html string
-        for (var property in feature.properties) {
-            popupContent += "<p>" + property + ": " + feature.properties[property] + "</p>";
-            console.log(popupContent)
-        }
-        layer.bindPopup(popupContent);
-    };
-};
+//============================================================================================
+//functions to set and update fill colors of HUC10s
 
 function getColor(d) {
     var colorArray = [
@@ -341,15 +321,58 @@ function getColor(d) {
                         '#ffffff';
 }
 
+function updateColor(d) {
+    var colorArray = [
+        '#f1eef6',
+        '#bdc9e1',
+        '#74a9cf',
+        '#2b8cbe',
+        '#045a8d']
+    return d > 5 ? colorArray[4] :
+        d > 4 ? colorArray[3] :
+            d > 3 ? colorArray[2] :
+                d > 2 ? colorArray[1] :
+                    d > 1 ? colorArray[0] :
+                        '#ffffff';
+}
+
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.STREAM_ORD),
         weight: 1,
         opacity: 1,
         color: 'orange',
-        fillOpacity: 0.3
+        fillOpacity: 0.2
     };
 }
+
+function updateStyle(feature) {
+    return {
+        fillColor: getColor(feature.properties.STREAM_ORD),
+        weight: 1,
+        opacity: 1,
+        color: 'orange',
+        fillOpacity: 0.2
+    };
+}
+//======================================================================================
+
+
+
+function onEachFeature(feature, layer) {
+    //no property named popupContent; instead, create html string with all properties
+    var popupContent = "";
+    if (feature.properties) {
+        //loop to add feature property names and values to html string
+        for (var property in feature.properties) {
+            popupContent += "<p>" + property + ": " + feature.properties[property] + "</p>";
+            console.log(popupContent)
+        }
+        layer.bindPopup(popupContent);
+    };
+};
+
+
 
 
 
