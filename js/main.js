@@ -130,8 +130,17 @@ function getData(map) {
                     }
                 }
             });
-            onEachFeature(json)
         })
+
+    function styleHuc(feature) {
+        return {
+            fillColor: 'blue',
+            weight: 2,
+            opacity: 1,
+            color: 'orange',
+            fillOpacity: 0.7
+        };
+    }
 
 
     fetch("data/huc10.json")
@@ -141,7 +150,7 @@ function getData(map) {
         // Call functions to create the map data
         .then(function (json) {
             huc10 = new L.geoJson(json, {
-                style: style
+                style: styleHuc
             })
         })
 
@@ -357,70 +366,6 @@ function updateStyle(feature) {
 }
 //======================================================================================
 
-
-
-function onEachFeature(feature, layer) {
-    //no property named popupContent; instead, create html string with all properties
-    var popupContent = "";
-    if (feature.properties) {
-        //loop to add feature property names and values to html string
-        for (var property in feature.properties) {
-            popupContent += "<p>" + property + ": " + feature.properties[property] + "</p>";
-            console.log(popupContent)
-        }
-        layer.bindPopup(popupContent);
-    };
-};
-
-
-
-
-
-/*function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    layer.bringToFront();
-}
-
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-}
-
-/*function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}*/
-
-/*function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        //click: zoomToFeature
-    });
-}
-
-var info = L.control();
-
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
-    return this._div;
-};
-
-// method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Watershed Information</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-        : 'Hover over a state');
-};
-
-info.addTo(map);
 
 
 /*
