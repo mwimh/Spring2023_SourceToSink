@@ -155,8 +155,8 @@ function getData(map) {
     };
 
     info.update = function (props) {
-        const contents = props ? `<b>${props.name}</b><br />${props.density} people / mi<sup>2</sup>` : 'Hover over a state';
-        this._div.innerHTML = `<h4>US Population Density</h4>${contents}`;
+        const contents = props ? `<b>${props.name}</b><br/>${props.density} people / mi<sup>2</sup>` : 'Hover over a Watershed';
+        this._div.innerHTML = `<h4>HUC Information</h4>${contents}`;
     };
 
     info.addTo(map)
