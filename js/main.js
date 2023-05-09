@@ -291,11 +291,11 @@ function getData(map) {
     }
 
     map.on('zoomend', function () {
-        if (map.getZoom() > 10 && map.hasLayer(rivers) == false) {
+        if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {
             map.addLayer(rivers);
             document.getElementById("riverbox").checked = true;
         }
-        if (map.getZoom() < 11 && map.hasLayer(rivers)) {
+        if (map.getZoom() < 10.5 && map.hasLayer(rivers)) {
             map.removeLayer(rivers);
             document.getElementById("riverbox").checked = false;
         }
