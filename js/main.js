@@ -367,9 +367,7 @@ function getData(map) {
         huc8.addTo(map);
         huc10.bringToFront();
         document.getElementById("huc8box").checked = true;
-
     }
-
 
     map.on('zoomend', function () {
         if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {
