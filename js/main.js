@@ -140,6 +140,37 @@ function getData(map) {
         };
     }
 
+	function highlightFeature(e) {
+		const layer = e.target;
+
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		layer.bringToFront();
+
+		info.update(layer.feature.properties);
+	}
+
+    function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
 
     fetch("data/huc10.json")
         .then(function (response) {
@@ -148,7 +179,8 @@ function getData(map) {
         // Call functions to create the map data
         .then(function (json) {
             huc10 = new L.geoJson(json, {
-                style: styleHuc
+                style: styleHuc,
+                onEachFeature
             })
         })
 
