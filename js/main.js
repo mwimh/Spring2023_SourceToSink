@@ -155,8 +155,12 @@ function getData(map) {
     };
 
     info.update = function (props) {
-        const contents = props ? `<b>${props.name}</b><br/>${props.density} people / mi<sup>2</sup>` : 'Hover over a Watershed';
-        this._div.innerHTML = `<h4>HUC Information</h4>${contents}`;
+        const contents = props ? `<b>HUC10 Name:</b> ${props.HUC10_NAME}
+            <br/><b>HUC8 Name: </b>${props.HUC8_NAME}
+            <br/><b>River Basin: </b>${props.RiverBasin}
+            <br/><b>Flow Destination: </b>${props.FlowDest}` 
+            : 'Hover over a Watershed';
+        this._div.innerHTML = `<h4>Watershed Information</h4>${contents}`;
     };
 
     info.addTo(map)
@@ -167,8 +171,6 @@ function getData(map) {
 		layer.setStyle({
 			weight: 5,
 			color: '#666',
-			//dashArray: '',
-			//fillOpacity: 0.7
 		});
 
 		layer.bringToFront();
