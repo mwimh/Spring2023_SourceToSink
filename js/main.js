@@ -80,6 +80,22 @@ function createMap() {
     
 };
 
+/*// control that shows state info on hover
+const info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+};
+
+info.update = function (props) {
+    const contents = props ? `<b>${props.name}</b><br />${props.density} people / mi<sup>2</sup>` : 'Hover over a state';
+    this._div.innerHTML = `<h4>US Population Density</h4>${contents}`;
+};
+
+info.addTo(map)*/
+
 function selectFeatureFromGEOJSON(latlng, huc10) {
     var latlng = (latlng.lat, latlng.lng);
     var selectedFeature = null;
@@ -130,15 +146,20 @@ function getData(map) {
             });
         })
 
-   /* function styleHuc(feature) {
-        return {
-            fillColor: 'blue',
-            weight: 2,
-            opacity: 1,
-            color: 'orange',
-            fillOpacity: 0.7
-        };
-    }*/
+    const info = L.control();
+
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+
+    info.update = function (props) {
+        const contents = props ? `<b>${props.name}</b><br />${props.density} people / mi<sup>2</sup>` : 'Hover over a state';
+        this._div.innerHTML = `<h4>US Population Density</h4>${contents}`;
+    };
+
+    info.addTo(map)
 
 	function highlightFeature(e) {
 		const layer = e.target;
@@ -160,15 +181,15 @@ function getData(map) {
 		info.update();
 	}
 
-	/*function zoomToFeature(e) {
+	function zoomToFeature(e) {
 		map.fitBounds(e.target.getBounds());
-	}*/
+	}
 
 	function onEachFeature(feature, layer) {
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
-			//click: zoomToFeature
+			click: zoomToFeature
 		});
 	}
 
