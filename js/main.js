@@ -410,6 +410,8 @@ legend.onAdd = function (map) {
         grades = [2, 3, 4, 5, 6, 7, 8],
         labels = [];
 
+        div.innerHTML = '<h2><u>HUC 10 Legend - Stream Order #</u></h2></b><p>Larger Numbers imply higher flow (i.e. downstream)</p>'
+
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
