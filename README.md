@@ -29,7 +29,7 @@ Supporting Info:
     - Federal Standards and Procedures for the National Watershed Boundary Dataset (WBD): https://pubs.usgs.gov/tm/11/a3/
 
 
-### Final Release Product
+### Final Release Product - Updated 5/9/2023
 1. ***Overview***
 
 
@@ -39,7 +39,7 @@ Supporting Info:
 3. ***Data***
     
 
-### Final Proposal
+### Final Proposal - Updated 4/12/2023
 1. ***Persona/Scenarios***
     1. **Persona**
     - *Target User Profile: Kathy Jones, Conservation Planner - Dane County, WI*
