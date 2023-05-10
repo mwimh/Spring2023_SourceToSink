@@ -55,20 +55,18 @@ function createMap() {
 
 function geoCoder(map) {
 
-    var geocoder = L.Control.geocoder({ iconlabel: 'New Search', showUniqueResult: true, collapsed: false, placeholder: ' Enter a Location' }).addTo(map);
+    var geocoder = L.Control.geocoder({ iconlabel: 'New Search', showUniqueResult: true, collapsed: true, placeholder: ' Enter a Location' }).addTo(map);
 
     // Add CSS style to the geocoder control element
     var geocoderControl = geocoder.getContainer();
-    geocoderControl.style.backgroundColor = '#74a9cf';
-    geocoderControl.querySelector('input').style.color = 'white';
+    geocoderControl.style.backgroundColor = '#003356';
+    geocoderControl.querySelector('input').style.color = '#FFFFFF';
 
 
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
-        //console.log(latlng.lat, latlng.lng);
         latLng = [latlng.lat, latlng.lng]
-        //return (latlng.lat, latlng.lng);
-        geoPip();
+        geoPip(latLng);
     })
 
 }
