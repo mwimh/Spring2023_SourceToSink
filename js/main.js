@@ -279,8 +279,8 @@ function getData(map) {
     map.on('zoomend', function () {
         if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {
             map.addLayer(rivers);
-            huc10.bringToFront();
             mainChannels.addTo(map);
+            huc10.bringToFront();
             document.getElementById("riverbox").checked = true;
         }
         if (map.getZoom() < 9.5 && map.hasLayer(rivers)) {
