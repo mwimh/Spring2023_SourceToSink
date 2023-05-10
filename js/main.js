@@ -278,7 +278,7 @@ function getData(map) {
                 style: function (feature) {
                     return {
                         color: "red",
-                        weight: 8,
+                        weight: 9,
                         className: 'stateDivideClass'
                     }
                 }
@@ -362,7 +362,7 @@ function getData(map) {
             if (hucName == streamRels[item].src_HUC10_NAME)
                 var statement = (streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
                 console.log(statement);
-                e.target.bindPopup(statement).openPopup();
+                //e.target.bindPopup(statement).openPopup();
             }
         
         huc8.addTo(map);
