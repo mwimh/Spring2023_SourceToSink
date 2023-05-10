@@ -19,9 +19,18 @@ Data:
     
     mississippi.json/greatLakes.json
     - riverBasin/riverName = Name of river basin
-    
-    streamsPerHuc10.json
-    - HUC10_Name = HUC 10 Name, each feature contains all the streams in each HUC 10
+
+    streamRels.json
+    - src_HUC10_NAME is Upstream/Downstream of nbr_HUC10_NAME = relationship of all huc10s in Wisconsin
+
+    mainChannels.json
+    - highlights the river/stream that each HUC10 is named for
+
+    streamsAll.json
+    - contains all the rivers and streams of stream order 3 or greater in Wisconsin
+
+    cities, huc8, stateDivide.json
+    - informational overlays
 
 Supporting Info:
 
