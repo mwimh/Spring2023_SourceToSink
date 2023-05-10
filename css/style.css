@@ -141,7 +141,7 @@ e:hover {
     border-radius: 5px;
     width: fit-content;
     height: fit-content;
-    bottom: 285px;
+    bottom: 15px;
     left: 1px;
 }
 
@@ -190,8 +190,7 @@ a:hover {
 .legend {
     line-height: 18px;
     color: #555;
-    bottom: 1px;
-    left: 1px;
+    
 }
 .legend i {
     width: 18px;
