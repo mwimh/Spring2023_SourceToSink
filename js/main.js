@@ -282,9 +282,9 @@ function getData(map) {
             document.getElementById("riverbox").checked = true;
         }
         if (map.getZoom() < 9.5 && map.hasLayer(rivers)) {
-            map.addLayer(stateDivide);
             map.addLayer(mississippi);
             map.addLayer(greatLakes);
+            map.addLayer(stateDivide);
             huc10.bringToFront();
             document.getElementById("dividebox").checked = true;
         }
@@ -387,17 +387,19 @@ function UncheckAll() {
 
 function getColor(d) {
     var colorArray = [
-        '#f7f7f7',
-        '#cccccc',
+        '#efefef',
+        '#bdbdbd',
         '#969696',
-        '#636363',
-        '#252525']
-    return d > 5 ? colorArray[4] :
-        d > 4 ? colorArray[3] :
-            d > 3 ? colorArray[2] :
-                d > 2 ? colorArray[1] :
-                    d > 1 ? colorArray[0] :
-                        '#ffffff';
+        '#737373',
+        '#303030',
+        '#000000']
+    return d > 7 ? colorArray[5] :
+        d > 6 ? colorArray[4] :
+            d > 5 ? colorArray[3] :
+                d > 4 ? colorArray[2] :
+                    d > 3 ? colorArray[1] :
+                        d > 2 ? colorArray[0] :
+                            '#ffffff';
 }
 
 var legend = L.control({ position: 'bottomleft' });
@@ -405,7 +407,7 @@ var legend = L.control({ position: 'bottomleft' });
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 1, 2, 3, 4, 5],
+        grades = [2, 3, 4, 5, 6, 7, 8],
         labels = [];
 
     // loop through our density intervals and generate a label with a colored square for each interval
@@ -424,9 +426,19 @@ function style(feature) {
         weight: 1.5,
         opacity: 1,
         color: '#f09e20',
-        fillOpacity: 0.3
+        fillOpacity: 0.5
     };
 }
+
+/*
+    var colorArray = [
+        '#f7f7f7',
+        '#cccccc',
+        '#969696',
+        '#636363',
+        '#252525']*/
+
+
 //======================================================================================
 
 document.addEventListener('DOMContentLoaded', createMap)
