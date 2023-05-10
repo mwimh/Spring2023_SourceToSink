@@ -281,7 +281,7 @@ function getData(map) {
             huc10.bringToFront();
             document.getElementById("riverbox").checked = true;
         }
-        if (map.getZoom() < 9.5 && map.hasLayer(rivers)) {
+        if (map.getZoom() < 9.5 ) {
             map.addLayer(mississippi);
             map.addLayer(greatLakes);
             map.addLayer(stateDivide);
@@ -418,7 +418,6 @@ legend.onAdd = function (map) {
             '<i style="background:' + getColor(grades[i]) + '"></i> ' +
             grades[i] + '<br>';
     }
-
     return div;
 };
 
@@ -431,15 +430,6 @@ function style(feature) {
         fillOpacity: 0.5
     };
 }
-
-/*
-    var colorArray = [
-        '#f7f7f7',
-        '#cccccc',
-        '#969696',
-        '#636363',
-        '#252525']*/
-
 
 //======================================================================================
 
