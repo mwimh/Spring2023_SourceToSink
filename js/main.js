@@ -145,40 +145,21 @@ function getData(map) {
             });
         })
 
-    /*
-        fetch("data/streamsHuc.json")
-            .then(function (response) {
-                return response.json();
-            })
-            // Call functions to create the map data
-            .then(function (json) {
-                streamsHuc = new L.geoJson(json, {
-                    style: function (feature) {
-                        return {
-                            color: "#3f53f7",
-                            weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD ** 0.65),
-                        }
+    fetch("data/mainChannels.json")
+        .then(function (response) {
+            return response.json();
+        })
+        // Call functions to create the map data
+        .then(function (json) {
+            mainChannels = new L.geoJson(json, {
+                style: function (feature) {
+                    return {
+                        color: "#3254a8",
+                        weight: (feature.properties.MAX_STREAM - feature.properties.MAX_STREAM ** 0.35),
                     }
-                });
-            })
-       */
-      
-        fetch("data/mainChannels.json")
-            .then(function (response) {
-                return response.json();
-            })
-            // Call functions to create the map data
-            .then(function (json) {
-                mainChannels = new L.geoJson(json, {
-                    style: function (feature) {
-                        return {
-                            color: "#0c1fbd",
-                            weight: (feature.properties.STREAM_ORD + 5),
-                        }
-                    }
-                });
-            })
- 
+                }
+            });
+        })
 
 
     fetch("data/greatLakes.json")
@@ -235,25 +216,6 @@ function getData(map) {
                 }
             });
         })
-
-/*
-    // Build an attributes array from the data
-    function streamData(data) {
-        var streamAtt = [];
-        //var properties = data.features[0].properties;
-        for (var item in data.features) {
-            streamAtt.push(data.features[item].properties)
-        }
-        return streamAtt;
-    };
-
-    fetch("data/streamRels.json")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (json) {
-            streamRels = streamData(json)
-        }) */
 
     const info = L.control({ position: 'bottomleft' });
 
@@ -318,6 +280,7 @@ function getData(map) {
         if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {
             map.addLayer(rivers);
             huc10.bringToFront();
+            mainChannels.addTo(map);
             document.getElementById("riverbox").checked = true;
         }
         if (map.getZoom() < 9.5 && map.hasLayer(rivers)) {
@@ -336,7 +299,6 @@ function getData(map) {
             click: zoomToFeature
         });
     }
-
 };
 
 //================================================================================================================
@@ -361,6 +323,7 @@ function checkboxes(map) {
                 if (box.value == "rivers") {
                     rivers.addTo(map);
                     huc10.bringToFront();
+                    mainChannels.addTo(map);
                 }
                 if (box.value == "divides") {
                     mississippi.addTo(map);
@@ -382,6 +345,7 @@ function checkboxes(map) {
                 }
                 if (box.value == "rivers") {
                     map.removeLayer(rivers);
+                    map.removeLayer(mainChannels);
                 }
                 if (box.value == "divides") {
                     map.removeLayer(mississippi);
@@ -400,7 +364,6 @@ function checkboxes(map) {
     L.control.zoom({
         position: 'bottomright'
     }).addTo(map);
-
 }
 
 function geoPip() {
@@ -457,23 +420,6 @@ legend.onAdd = function (map) {
     return div;
 };
 
-
-
-function updateColor(d) {
-    var colorArray = [
-        '#f1eef6',
-        '#bdc9e1',
-        '#74a9cf',
-        '#2b8cbe',
-        '#045a8d']
-    return d > 5 ? colorArray[4] :
-        d > 4 ? colorArray[3] :
-            d > 3 ? colorArray[2] :
-                d > 2 ? colorArray[1] :
-                    d > 1 ? colorArray[0] :
-                        '#ffffff';
-}
-
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.STREAM_ORD),
@@ -481,16 +427,6 @@ function style(feature) {
         opacity: 1,
         color: '#f09e20',
         fillOpacity: 0.3
-    };
-}
-
-function updateStyle(feature) {
-    return {
-        fillColor: getColor(feature.properties.STREAM_ORD),
-        weight: 1,
-        opacity: 1,
-        color: '#045a8d',
-        fillOpacity: 0.2
     };
 }
 //======================================================================================
