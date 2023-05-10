@@ -119,6 +119,7 @@ function getData(map) {
                         fillColor: "none",
                         color: "purple",
                         weight: 4,
+                        opacity: 0.7,
                         className: 'huc8Class'
                     }
                 }
@@ -169,9 +170,9 @@ function getData(map) {
             greatLakes = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        fillColor: "green",
-                        color: "black",
-                        weight: 6,
+                        fillColor: "#01665e",
+                        color: "#01665e",
+                        weight: 8,
                         fillOpacity: 0.1,
                         className: 'greatLakesClass'
                     }
@@ -188,9 +189,9 @@ function getData(map) {
             mississippi = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        fillColor: "purple",
-                        color: "black",
-                        weight: 6,
+                        fillColor: "#8c510a",
+                        color: "#8c510a",
+                        weight: 8,
                         fillOpacity: 0.1,
                         className: 'mississippiClass'
                     }
@@ -250,9 +251,9 @@ function getData(map) {
 
     function resetHighlight(e) {
         huc10.setStyle({
-            weight: 1.5,
-            opacity: 1,
-            color: '#f09e20',
+            weight: 1,
+            opacity: 0.7,
+            color: '#f2ac00',
         })
         info.update();
     }
@@ -270,6 +271,9 @@ function getData(map) {
         });
 
         huc8.addTo(map);
+        mississippi.bringToFront();
+        greatLakes.bringToFront();
+        stateDivide.bringToFront();
         huc10.bringToFront();
         document.getElementById("huc8box").checked = true;
     }
@@ -277,16 +281,21 @@ function getData(map) {
     map.on('zoomend', function () {
         if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {
             map.addLayer(rivers);
-            mainChannels.addTo(map);
+            map.addLayer(mainChannels);
+            map.addLayer(huc8);
+            mississippi.bringToFront();
+            greatLakes.bringToFront();
+            stateDivide.bringToFront();
             huc10.bringToFront();
             document.getElementById("riverbox").checked = true;
+            document.getElementById("huc8box").checked = true;
         }
-        if (map.getZoom() < 9.5 ) {
-            map.addLayer(mississippi);
-            map.addLayer(greatLakes);
-            map.addLayer(stateDivide);
-            huc10.bringToFront();
-            document.getElementById("dividebox").checked = true;
+        if (map.getZoom() < 9.5) {
+            //map.addLayer(mississippi);
+            //map.addLayer(greatLakes);
+            //map.addLayer(stateDivide);
+            //huc10.bringToFront();
+            //document.getElementById("dividebox").checked = true;
         }
     });
 
@@ -316,6 +325,9 @@ function checkboxes(map) {
                 }
                 if (box.value == "huc8") {
                     huc8.addTo(map);
+                    mississippi.bringToFront();
+                    greatLakes.bringToFront();
+                    stateDivide.bringToFront();
                     huc10.bringToFront();
                 }
                 if (box.value == "rivers") {
@@ -327,6 +339,9 @@ function checkboxes(map) {
                     mississippi.addTo(map);
                     greatLakes.addTo(map);
                     stateDivide.addTo(map);
+                    mississippi.bringToFront();
+                    greatLakes.bringToFront();
+                    stateDivide.bringToFront();
                     huc10.bringToFront();
                 }
 
@@ -407,10 +422,10 @@ var legend = L.control({ position: 'bottomleft' });
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [2, 3, 4, 5, 6, 7, 8],
+        grades = [1, 2, 3, 4, 5, 6, 7, 8],
         labels = [];
 
-        div.innerHTML = '<h2><u>HUC 10 Legend - Stream Order #</u></h2></b><p>Larger Numbers imply higher flow (i.e. downstream)</p>'
+    div.innerHTML = '<h2><u>HUC 10 Legend - Stream Order #</u></h2></b><p>Larger Numbers imply higher flow (i.e. downstream)</p>'
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
@@ -424,10 +439,10 @@ legend.onAdd = function (map) {
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.STREAM_ORD),
-        weight: 1.5,
-        opacity: 1,
-        color: '#f09e20',
-        fillOpacity: 0.5
+        weight: 1,
+        opacity: 0.7,
+        color: '#f2ac00',
+        fillOpacity: (feature.properties.STREAM_ORD - 1) / 10
     };
 }
 
