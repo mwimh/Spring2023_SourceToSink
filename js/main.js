@@ -154,7 +154,7 @@ function getData(map) {
             mainChannels = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        color: "#3254a8",
+                        color: "#00709d",
                         weight: (feature.properties.MAX_STREAM - feature.properties.MAX_STREAM ** 0.35),
                     }
                 }
