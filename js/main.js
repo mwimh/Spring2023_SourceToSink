@@ -1,3 +1,4 @@
+//set global variables
 var map;
 var cities, rivers, huc8, huc10, geojson, streamRels, mainChannels, hucRels;
 
@@ -11,6 +12,7 @@ window.addEventListener("load", function () {
     )
 });
 
+//popup window interactions
 document.querySelector("#close").addEventListener("click", function () {
     document.querySelector(".popup").style.display = "none";
 });
@@ -23,7 +25,7 @@ document.querySelector("#letsGo").addEventListener("click", function () {
 //create map
 function createMap() {
     var map = L.map('map').setView([44.75, -90], 8);
-
+    //create basemap and set zoom limits
     var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
         maxZoom: 12,
         minZoom: 7,
@@ -41,7 +43,7 @@ function createMap() {
         });
     });
 
-    //call functions
+    //call functions to add elements
     getData(map);
     checkboxes(map);
     geoCoder(map);
@@ -61,7 +63,7 @@ function geoCoder(map) {
     geocoderControl.style.backgroundColor = '#003356';
     geocoderControl.querySelector('input').style.color = '#FFFFFF';
 
-
+    // gets geocoder lat long
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
         latLng = [latlng.lat, latlng.lng]
@@ -70,15 +72,13 @@ function geoCoder(map) {
 }
 
 //================================================================================================================
-//Process geojsons
+//fetch and process geojsons and set initial style parameters
 
-// Load and convert geojson data to be used
 function getData(map) {
     fetch("data/cities.json")
         .then(function (response) {
             return response.json();
         })
-        // Call functions to create the map data
         .then(function (json) {
             cities = new L.geoJson(json, {
                 style: function (feature) {
@@ -96,7 +96,6 @@ function getData(map) {
         .then(function (response) {
             return response.json();
         })
-        // Call functions to create the map data
         .then(function (json) {
             huc10 = new L.geoJson(json, {
                 style: style,
@@ -109,7 +108,6 @@ function getData(map) {
         .then(function (response) {
             return response.json();
         })
-        // Call functions to create the map data
         .then(function (json) {
             huc8 = new L.geoJson(json, {
                 style: function (feature) {
@@ -129,7 +127,6 @@ function getData(map) {
         .then(function (response) {
             return response.json();
         })
-        // Call functions to create the map data
         .then(function (json) {
             rivers = new L.geoJson(json, {
                 style: function (feature) {
@@ -146,7 +143,6 @@ function getData(map) {
         .then(function (response) {
             return response.json();
         })
-        // Call functions to create the map data
         .then(function (json) {
             mainChannels = new L.geoJson(json, {
                 style: function (feature) {
@@ -163,7 +159,6 @@ function getData(map) {
         .then(function (response) {
             return response.json();
         })
-        // Call functions to create the map data
         .then(function (json) {
             greatLakes = new L.geoJson(json, {
                 style: function (feature) {
@@ -182,7 +177,6 @@ function getData(map) {
         .then(function (response) {
             return response.json();
         })
-        // Call functions to create the map data
         .then(function (json) {
             mississippi = new L.geoJson(json, {
                 style: function (feature) {
@@ -201,7 +195,6 @@ function getData(map) {
         .then(function (response) {
             return response.json();
         })
-        // Call functions to create the map data
         .then(function (json) {
             stateDivide = new L.geoJson(json, {
                 style: function (feature) {
@@ -214,12 +207,10 @@ function getData(map) {
             });
         })
 
-    //+++++++++++++++++++++
 
-    // Build an attributes array from the data
+    //process the streamRels data to be used later
     function processData(data) {
         var attributes = [];
-        //var properties = data.features[0].properties;
         for (var item in data.features) {
             attributes.push(data.features[item].properties)
         }
@@ -234,12 +225,7 @@ function getData(map) {
             streamRels = processData(json)
         })
 
-
-
-
-    //+++++++++++++++++++++++
-
-
+    //create huc info popup and set update parameters for hover interaction
     const info = L.control({ position: 'bottomleft' });
 
     info.onAdd = function (map) {
@@ -262,6 +248,7 @@ function getData(map) {
     //================================================================================================================
     //highlight, dehighlight, and zoom to feature
 
+    //highlight function
     function highlightFeature(e) {
         const layer = e.target;
 
@@ -273,6 +260,7 @@ function getData(map) {
         info.update(layer.feature.properties);
     }
 
+    //function to reset highlight to initial parameters
     function resetHighlight(e) {
         huc10.setStyle({
             weight: 1,
@@ -282,18 +270,20 @@ function getData(map) {
         info.update();
     }
 
+    //function to zoom to feature and display information when a huc10 is clicked
     function zoomToFeature(e) {
-
+        //reset huc10 style initially to remove previous color change
         huc10.resetStyle();
+        //fly to the center of the selected huc10
         huc10Center = e.target.getBounds().getCenter();
         map.flyTo(huc10Center, 10.5);
 
-        hucName = e.target.feature.properties.HUC10_NAME
-
+        //color selected huc10
         e.target.setStyle({
             fillColor: "blue",
         });
 
+        //add additional layers to map on selection and set layer order if present
         huc8.addTo(map);
         mississippi.bringToFront();
         greatLakes.bringToFront();
@@ -301,25 +291,23 @@ function getData(map) {
         huc10.bringToFront();
         document.getElementById("huc8box").checked = true;
 
-        //++++++++++++++++++++++++++++
-
+        //set variable for name of selected huc 10
         hucName = e.target.feature.properties.HUC10_NAME
-
+        //create array to store huc relationships
         var hucRels = [hucName];
-
+        //find huc relationships in streamRels
         for (var item in streamRels) {
             if (hucName == streamRels[item].src_HUC10_NAME) {
                 hucRels.push(streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME)
             }
         }
-
+        //create array of huc relationships
         var relCon = '';
 
         for (var i = 1; i < hucRels.length; i++) {
             relCon = relCon + hucRels[i] + '<br>'
         }
-
-        
+        //create, update, and add popup to display huc relationsships
         const rels = L.control({ position: 'bottomright' });
 
         rels.onAdd = function (map) {
@@ -330,7 +318,7 @@ function getData(map) {
 
         rels.update = function (props) {
             const elements = document.getElementsByClassName('rels leaflet-control');
-            while(elements.length > 0){
+            while (elements.length > 0) {
                 elements[0].parentNode.removeChild(elements[0]);
             }
             const relContent = '<h2>The <span id="currentHuc">' + hucRels[0] + '</span> watershed is: <br>' + relCon + '</h2>';
@@ -338,11 +326,9 @@ function getData(map) {
         };
 
         rels.addTo(map)
-
-
-        //+++++++++++++++++++++++
     }
 
+    //add update layers based on zoom level
     map.on('zoomend', function () {
         if (map.getZoom() > 9.5 && map.hasLayer(rivers) == false) {
             map.addLayer(rivers);
@@ -364,6 +350,7 @@ function getData(map) {
         }
     });
 
+    //set interaction functions based on events
     function onEachFeature(feature, layer) {
         layer.on({
             mouseover: highlightFeature,
@@ -375,8 +362,7 @@ function getData(map) {
 
 
 //================================================================================================================
-//add layers via checkbox
-
+//add and remove layers via checkbox
 function checkboxes(map) {
     document.querySelectorAll(".checkbox").forEach(function (box) {
         box.addEventListener("change", function () {
@@ -410,7 +396,6 @@ function checkboxes(map) {
                     stateDivide.bringToFront();
                     huc10.bringToFront();
                 }
-
             }
             else {
                 if (box.value == "cities") {
@@ -436,8 +421,10 @@ function checkboxes(map) {
         })
     })
 
+    //uncheck all checkboxes except huc10 on page load
     UncheckAll();
 
+    //reposition zoom control to bottom right
     map.removeControl(map.zoomControl);
 
     L.control.zoom({
@@ -445,6 +432,7 @@ function checkboxes(map) {
     }).addTo(map);
 }
 
+//function to uncheck all checkboxes except the huc 10 checkbox on initial page load or reset
 function UncheckAll() {
     var w = document.getElementsByTagName('input');
     for (var i = 0; i < w.length; i++) {
@@ -457,7 +445,6 @@ function UncheckAll() {
 
 //============================================================================================
 //functions to set and update fill colors of HUC10s
-
 function getColor(d) {
     var colorArray = [
         '#efefef',
@@ -475,6 +462,7 @@ function getColor(d) {
                             '#ffffff';
 }
 
+//create legend based on huc10 colors
 var legend = L.control({ position: 'bottomleft' });
 
 legend.onAdd = function (map) {
@@ -494,6 +482,7 @@ legend.onAdd = function (map) {
     return div;
 };
 
+//styel function for huc10s
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.STREAM_ORD),
