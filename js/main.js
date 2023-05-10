@@ -307,6 +307,11 @@ function getData(map) {
         for (var i = 1; i < hucRels.length; i++) {
             relCon = relCon + hucRels[i] + '<br>'
         }
+
+        if (relCon == '') {
+            relCon = ['Not related to any additional watersheds in Wisconsin']
+        }
+
         //create, update, and add popup to display huc relationsships
         const rels = L.control({ position: 'bottomright' });
 
@@ -471,13 +476,14 @@ legend.onAdd = function (map) {
         grades = [1, 2, 3, 4, 5, 6, 7, 8],
         labels = [];
 
-    div.innerHTML = '<h2><u>HUC 10 Legend - Stream Order #</u></h2></b><p>Larger Numbers imply higher flow (i.e. downstream)</b></p>'
+    div.innerHTML = '<h2><u>HUC 10 Legend - Stream Order #</u></h2></b><p>Larger Numbers imply higher flow (i.e. downstream/larger streams)</b></p>'
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor(grades[i]) + '"></i> ' +
-            grades[i] + '<br>';
+            '<i style="background:' + getColor(grades[i]) + '"></i> ';
+        div.innerHTML +=
+            '<i>' + grades[i] + '</i> ';
     }
     return div;
 };
