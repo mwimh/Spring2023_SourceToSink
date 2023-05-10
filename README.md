@@ -31,7 +31,7 @@ Supporting Info:
 
 ### Final Release Product - Updated 5/9/2023
 1. ***Overview***
-
+    Source to Sink watershed viewer allows Wisconsin residents to see how the water supply for their home or business may interact with watersheds at local/regional level. Groundwater and surface water systems are highly interrelated, and this tool helps to tell part of that story. A private well user or a municipal resident is able to search their address or find the
 
 2. ***Operation***
     - To use this webmap, it's as simple as clicking and dragging around the map. Simply hovering over the various watersheds will highlight the one the mouse is over, and a popup in the bottom left of the screen will update with various information about each watershed. Clicking on the watersheds will center the map on the selected watershed, and allow you to explore the relationship between the ones around it. If look for a specific watershed, just select it. If you are unsure of which watershed your home is located in, use the search function in the top right to locate a specific location, and which watershed it is in. After finding your watershed, feel free to explore the other data layers in the layer selection menu in the top left. Here, you can see where your watershed is in relation to cities, a continental divide, and even larger watersheds. Don't know what these layers represent? Feel free to click the information icon next to each layer and explore what each layer represents. Have fun explopring the watersheds of Wisconsin!
