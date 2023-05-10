@@ -46,6 +46,7 @@ function createMap() {
     getData(map);
     checkboxes(map);
     geoCoder(map);
+    legend.addTo(map);
 
 };
 
@@ -446,6 +447,26 @@ function getColor(d) {
                     d > 1 ? colorArray[0] :
                         '#ffffff';
 }
+
+var legend = L.control({position: 'bottomleft'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 1, 2, 3, 4, 5],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+        '<i style="background:' + getColor(grades[i]) + '"></i> ' +
+        grades[i] + '<br>';
+    }
+
+    return div;
+};
+
+
 
 function updateColor(d) {
     var colorArray = [
