@@ -170,7 +170,7 @@ function getData(map) {
             greatLakes = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        fillColor: "#01665e",
+                        fillColor: "none",
                         color: "#01665e",
                         weight: 8,
                         fillOpacity: 0.1,
@@ -189,7 +189,7 @@ function getData(map) {
             mississippi = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        fillColor: "#8c510a",
+                        fillColor: "none",
                         color: "#8c510a",
                         weight: 8,
                         fillOpacity: 0.1,
