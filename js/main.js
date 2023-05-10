@@ -161,7 +161,8 @@ function getData(map) {
                     }
                 });
             })
-    
+       */
+      
         fetch("data/mainChannels.json")
             .then(function (response) {
                 return response.json();
@@ -177,7 +178,7 @@ function getData(map) {
                     }
                 });
             })
-    */
+ 
 
 
     fetch("data/greatLakes.json")
@@ -235,7 +236,7 @@ function getData(map) {
             });
         })
 
-
+/*
     // Build an attributes array from the data
     function streamData(data) {
         var streamAtt = [];
@@ -245,14 +246,14 @@ function getData(map) {
         }
         return streamAtt;
     };
-   
+
     fetch("data/streamRels.json")
         .then(function (response) {
             return response.json();
         })
         .then(function (json) {
             streamRels = streamData(json)
-        })
+        }) */
 
     const info = L.control({ position: 'bottomleft' });
 
@@ -307,16 +308,6 @@ function getData(map) {
         e.target.setStyle({
             fillColor: "blue",
         });
-
-        /*
-        for (var item in streamRels) {
-            if (hucName == streamRels[item].src_HUC10_NAME)
-                var statement = ('The ' + streamRels[item].src_HUC10_NAME + ' watershed is ' + streamRels[item].UpDwn + ' of the ' + streamRels[item].nbr_HUC10_NAME  +' watershed.');
-                console.log(statement);
-                //e.target.bindPopup(statement).openPopup();
-            }
-        
-            */
 
         huc8.addTo(map);
         huc10.bringToFront();
@@ -448,7 +439,7 @@ function getColor(d) {
                         '#ffffff';
 }
 
-var legend = L.control({position: 'bottomleft'});
+var legend = L.control({ position: 'bottomleft' });
 
 legend.onAdd = function (map) {
 
@@ -459,8 +450,8 @@ legend.onAdd = function (map) {
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-        '<i style="background:' + getColor(grades[i]) + '"></i> ' +
-        grades[i] + '<br>';
+            '<i style="background:' + getColor(grades[i]) + '"></i> ' +
+            grades[i] + '<br>';
     }
 
     return div;
