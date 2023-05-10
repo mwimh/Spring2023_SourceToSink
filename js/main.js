@@ -70,58 +70,7 @@ function geoCoder(map) {
         geoPip();
     })
 
-
-
 }
-
-//================================================================================================================
-//add hover function
-
-/*// control that shows state info on hover
-const info = L.control();
-
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info');
-    this.update();
-    return this._div;
-};
-
-info.update = function (props) {
-    const contents = props ? `<b>${props.name}</b><br />${props.density} people / mi<sup>2</sup>` : 'Hover over a state';
-    this._div.innerHTML = `<h4>US Population Density</h4>${contents}`;
-};
-
-info.addTo(map)*/
-
-function selectFeatureFromGEOJSON(latlng, huc10) {
-    var latlng = (latlng.lat, latlng.lng);
-    var selectedFeature = null;
-    console.log(latlng);
-
-
-}
-
-function processData(data) {
-    //empty array to hold attributes
-    var attributes = [];
-
-    //properties of the first feature in the dataset
-    var properties = data.features[0].properties;
-
-    /*//push each attribute name into attributes array
-    for (var attribute in properties){
-        //only take attributes with population values
-        if (attribute.indexOf("Visitors") > -1){
-            attributes.push(attribute);
-        };
-    };*/
-
-    //check result
-    console.log(attributes);
-
-    return attributes;
-};
-
 
 //================================================================================================================
 //Process geojsons
@@ -195,39 +144,39 @@ function getData(map) {
             });
         })
 
-/*
-    fetch("data/streamsHuc.json")
-        .then(function (response) {
-            return response.json();
-        })
-        // Call functions to create the map data
-        .then(function (json) {
-            streamsHuc = new L.geoJson(json, {
-                style: function (feature) {
-                    return {
-                        color: "#3f53f7",
-                        weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD ** 0.65),
+    /*
+        fetch("data/streamsHuc.json")
+            .then(function (response) {
+                return response.json();
+            })
+            // Call functions to create the map data
+            .then(function (json) {
+                streamsHuc = new L.geoJson(json, {
+                    style: function (feature) {
+                        return {
+                            color: "#3f53f7",
+                            weight: (feature.properties.STREAM_ORD - feature.properties.STREAM_ORD ** 0.65),
+                        }
                     }
-                }
-            });
-        })
-
-    fetch("data/mainChannels.json")
-        .then(function (response) {
-            return response.json();
-        })
-        // Call functions to create the map data
-        .then(function (json) {
-            mainChannels = new L.geoJson(json, {
-                style: function (feature) {
-                    return {
-                        color: "#0c1fbd",
-                        weight: (feature.properties.STREAM_ORD + 5),
+                });
+            })
+    
+        fetch("data/mainChannels.json")
+            .then(function (response) {
+                return response.json();
+            })
+            // Call functions to create the map data
+            .then(function (json) {
+                mainChannels = new L.geoJson(json, {
+                    style: function (feature) {
+                        return {
+                            color: "#0c1fbd",
+                            weight: (feature.properties.STREAM_ORD + 5),
+                        }
                     }
-                }
-            });
-        })
-*/
+                });
+            })
+    */
 
 
     fetch("data/greatLakes.json")
@@ -287,21 +236,21 @@ function getData(map) {
 
 
     // Build an attributes array from the data
-    function processData(data) {
-        var attributes = [];
+    function streamData(data) {
+        var streamAtt = [];
         //var properties = data.features[0].properties;
         for (var item in data.features) {
-            attributes.push(data.features[item].properties)
+            streamAtt.push(data.features[item].properties)
         }
-        return attributes;
+        return streamAtt;
     };
-
+   
     fetch("data/streamRels.json")
         .then(function (response) {
             return response.json();
         })
         .then(function (json) {
-            streamRels = processData(json)
+            streamRels = streamData(json)
         })
 
     const info = L.control({ position: 'bottomleft' });
@@ -330,7 +279,7 @@ function getData(map) {
         const layer = e.target;
 
         layer.setStyle({
-            weight: 5,
+            weight: 6,
             color: '#eaa40e',
         });
 
@@ -358,18 +307,19 @@ function getData(map) {
             fillColor: "blue",
         });
 
+        /*
         for (var item in streamRels) {
             if (hucName == streamRels[item].src_HUC10_NAME)
-                var statement = (streamRels[item].src_HUC10_NAME + ' is ' + streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME);
+                var statement = ('The ' + streamRels[item].src_HUC10_NAME + ' watershed is ' + streamRels[item].UpDwn + ' of the ' + streamRels[item].nbr_HUC10_NAME  +' watershed.');
                 console.log(statement);
                 //e.target.bindPopup(statement).openPopup();
             }
         
+            */
+
         huc8.addTo(map);
         huc10.bringToFront();
         document.getElementById("huc8box").checked = true;
-
-        //add popup here with the console log statement above (line 363) in the pop-up, there will be multiple lines for most hucs I think
     }
 
     map.on('zoomend', function () {
@@ -532,19 +482,5 @@ function updateStyle(feature) {
     };
 }
 //======================================================================================
-
-
-
-/*
-On selection of point on map or input of address:
-1. Zoom to containing HUC 8 (map extents set to include entirity of HUC 8)
-2. Highlight the selected HUC 10
-3. Popup window below 'Options' displays info about HUC 10 (name, HUC 8 name, River System, where it flows,...)
-4. Find upstream HUC 10s in relationship CSV file (one layer upstream only to avoid confusion of contributing flow from further upstream)
-5. Highlight main river channel in river basin dark blue (by river system name)
-6. Highlight channels in upstream HUCs in light blue
-*/
-
-//map.attributionControl.addAttribution('Shapefile data &copy; <a href="https://data-wi-dnr.opendata.arcgis.com/">WI DNR GIS Portal</a>');
 
 document.addEventListener('DOMContentLoaded', createMap)
