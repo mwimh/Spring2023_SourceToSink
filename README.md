@@ -37,7 +37,15 @@ Supporting Info:
     - To use this webmap, it's as simple as clicking and dragging around the map. Simply hovering over the various watersheds will highlight the one the mouse is over, and a popup in the bottom left of the screen will update with various information about each watershed. Clicking on the watersheds will center the map on the selected watershed, and allow you to explore the relationship between the ones around it. If look for a specific watershed, just select it. If you are unsure of which watershed your home is located in, use the search function in the top right to locate a specific location, and which watershed it is in. After finding your watershed, feel free to explore the other data layers in the layer selection menu in the top left. Here, you can see where your watershed is in relation to cities, a continental divide, and even larger watersheds. Don't know what these layers represent? Feel free to click the information icon next to each layer and explore what each layer represents. Have fun explopring the watersheds of Wisconsin!
 
 3. ***Data***
-    
+    - Huc 8 Shapefiles: https://data-wi-dnr.opendata.arcgis.com/datasets/wi-dnr::hydrologic-units-8-digit-subbasins/explore?location=44.943564%2C-88.884609%2C7.00
+    - Huc 8 Info Button: https://www.usgs.gov/media/images/watershed-boundary-dataset-structure-visualization
+    - Huc 10 Shapefiles: https://data-wi-dnr.opendata.arcgis.com/datasets/wi-dnr::hydrologic-units-10-digit-watersheds/explore?location=45.175046%2C-88.726671%2C7.00
+    - Huc 10 Info Button: https://dep.wv.gov/wwe/getinvolved/sos/documents/basins/hucprimer.pdf
+    - Continental Divide Lines: 
+    - Continental Divide Lines Info Button: https://www.geographyrealm.com/north-american-continental-divide/
+    - Rivers and Streams: https://data-wi-dnr.opendata.arcgis.com/datasets/wi-dnr::24k-hydro-flowlines-rivers-streams/explore?location=44.694099%2C-89.796153%2C12.01
+    - Municipalities: https://data-ltsb.opendata.arcgis.com/datasets/LTSB::wi-cities-towns-and-villages-january-2023/explore?location=44.763386%2C-89.826650%2C8.15
+    - 
 
 ### Final Proposal - Updated 4/12/2023
 1. ***Persona/Scenarios***
