@@ -1,6 +1,5 @@
 var map;
-var cities, rivers, huc8, huc10, geojson, streamRels, streamsHuc, mainChannels;
-var latLng = [];
+var cities, rivers, huc8, huc10, geojson, streamRels, mainChannels, hucRels;
 
 //initial popup window
 window.addEventListener("load", function () {
@@ -66,7 +65,6 @@ function geoCoder(map) {
     geocoder.on('markgeocode', function (event) {
         var latlng = event.geocode.center;
         latLng = [latlng.lat, latlng.lng]
-        geoPip(latLng);
     })
 
 }
@@ -216,6 +214,32 @@ function getData(map) {
             });
         })
 
+    //+++++++++++++++++++++
+
+    // Build an attributes array from the data
+    function processData(data) {
+        var attributes = [];
+        //var properties = data.features[0].properties;
+        for (var item in data.features) {
+            attributes.push(data.features[item].properties)
+        }
+        return attributes;
+    };
+
+    fetch("data/streamRels.json")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (json) {
+            streamRels = processData(json)
+        })
+
+
+
+
+    //+++++++++++++++++++++++
+
+
     const info = L.control({ position: 'bottomleft' });
 
     info.onAdd = function (map) {
@@ -225,10 +249,10 @@ function getData(map) {
     };
 
     info.update = function (props) {
-        const contents = props ? `<h6><b>HUC10 Name:</b> ${props.HUC10_NAME}
-                <br/><b>HUC8 Name: </b>${props.HUC8_NAME}
-                <br/><b>River Basin: </b>${props.RiverBasin}
-                <br/><b>Flow Destination: </b>${props.FlowDest}`
+        const contents = props ? `<h6><span style="color:#3b3b3b">HUC10 Name:</span> ${props.HUC10_NAME}
+                <br/><span style="color:#3b3b3b">HUC8 Name: </span>${props.HUC8_NAME}
+                <br/><span style="color:#3b3b3b">River Basin: </span>${props.RiverBasin}
+                <br/><span style="color:#3b3b3b">Flow Destination: </span>${props.FlowDest}`
             : 'Hover over a Watershed</h6>';
         this._div.innerHTML = `<h4>Watershed Information</h4>${contents}`;
     };
@@ -276,6 +300,47 @@ function getData(map) {
         stateDivide.bringToFront();
         huc10.bringToFront();
         document.getElementById("huc8box").checked = true;
+
+        //++++++++++++++++++++++++++++
+
+        hucName = e.target.feature.properties.HUC10_NAME
+
+        var hucRels = [hucName];
+
+        for (var item in streamRels) {
+            if (hucName == streamRels[item].src_HUC10_NAME) {
+                hucRels.push(streamRels[item].UpDwn + ' of ' + streamRels[item].nbr_HUC10_NAME)
+            }
+        }
+
+        var relCon = '';
+
+        for (var i = 1; i < hucRels.length; i++) {
+            relCon = relCon + hucRels[i] + '<br>'
+        }
+
+        
+        const rels = L.control({ position: 'bottomright' });
+
+        rels.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'rels');
+            this.update();
+            return this._div;
+        };
+
+        rels.update = function (props) {
+            const elements = document.getElementsByClassName('rels leaflet-control');
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+            const relContent = '<h2>The <span id="currentHuc">' + hucRels[0] + '</span> watershed is: <br>' + relCon + '</h2>';
+            this._div.innerHTML = `${relContent}`;
+        };
+
+        rels.addTo(map)
+
+
+        //+++++++++++++++++++++++
     }
 
     map.on('zoomend', function () {
@@ -290,12 +355,12 @@ function getData(map) {
             document.getElementById("riverbox").checked = true;
             document.getElementById("huc8box").checked = true;
         }
-        if (map.getZoom() < 9.5) {
-            //map.addLayer(mississippi);
-            //map.addLayer(greatLakes);
-            //map.addLayer(stateDivide);
-            //huc10.bringToFront();
-            //document.getElementById("dividebox").checked = true;
+        if (map.getZoom() < 8) {
+            map.addLayer(mississippi);
+            map.addLayer(greatLakes);
+            map.addLayer(stateDivide);
+            huc10.bringToFront();
+            document.getElementById("dividebox").checked = true;
         }
     });
 
@@ -307,6 +372,7 @@ function getData(map) {
         });
     }
 };
+
 
 //================================================================================================================
 //add layers via checkbox
@@ -379,14 +445,6 @@ function checkboxes(map) {
     }).addTo(map);
 }
 
-function geoPip() {
-    for (var item in huc10) {
-        if (item.contains(latLng)) {
-            zoomToFeature;
-        }
-    }
-}
-
 function UncheckAll() {
     var w = document.getElementsByTagName('input');
     for (var i = 0; i < w.length; i++) {
@@ -421,11 +479,11 @@ var legend = L.control({ position: 'bottomleft' });
 
 legend.onAdd = function (map) {
 
-    var div = L.DomUtil.create('div', 'info legend'),
+    var div = L.DomUtil.create('div', 'legend'),
         grades = [1, 2, 3, 4, 5, 6, 7, 8],
         labels = [];
 
-    div.innerHTML = '<h2><u>HUC 10 Legend - Stream Order #</u></h2></b><p>Larger Numbers imply higher flow (i.e. downstream)</p>'
+    div.innerHTML = '<h2><u>HUC 10 Legend - Stream Order #</u></h2></b><p>Larger Numbers imply higher flow (i.e. downstream)</b></p>'
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {

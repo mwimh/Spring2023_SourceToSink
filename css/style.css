@@ -81,7 +81,7 @@ e:hover {
 
 .title-text {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: azure;
+    background-color: rgb(231, 245, 245);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -140,9 +140,9 @@ e:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     width: fit-content;
-    height: fit-content;
-    bottom: 15px;
-    left: 1px;
+    height: 170px;
+    bottom: 40px;
+    left: 35px;
 }
 
 .info h4 {
@@ -153,7 +153,7 @@ e:hover {
 }
 
 .info h6 {
-    font-size: larger;
+    font-size: 14pt;
     color: #777;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -190,6 +190,17 @@ a:hover {
 .legend {
     line-height: 18px;
     color: #555;
+    padding: 6px 15px;
+    font: 14px/16px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    bottom: 40px;
+    left: 35px;
     
 }
 .legend i {
@@ -198,4 +209,25 @@ a:hover {
     float: left;
     margin-right: 8px;
     opacity: 0.7;
+}
+
+.rels {
+    padding: 6px 15px;
+    font: 14px/16px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    bottom: 15px;
+    right: 100px;
+    color: #555;
+}
+
+#currentHuc {
+    font-size: large;
+    font-weight: bold;
+    color: #111
 }
