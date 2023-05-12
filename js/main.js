@@ -24,13 +24,21 @@ document.querySelector("#letsGo").addEventListener("click", function () {
 
 //create map
 function createMap() {
-    var map = L.map('map').setView([44.75, -90], 8);
+    //var map = L.map('map').setView([44.75, -90], 8);
+    var map = L.map('map', {
+        center: [44.5, -90],
+        zoom: 8
+    });
     //create basemap and set zoom limits
+
+
     var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
         maxZoom: 12,
         minZoom: 7,
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
+
+
 
     //set map boundaries
     var northW = L.latLng(49, -96);
@@ -147,7 +155,7 @@ function getData(map) {
             mainChannels = new L.geoJson(json, {
                 style: function (feature) {
                     return {
-                        color: "#00709d",
+                        color: "#333cff",
                         weight: (feature.properties.MAX_STREAM - feature.properties.MAX_STREAM ** 0.35),
                     }
                 }
@@ -280,7 +288,7 @@ function getData(map) {
 
         //color selected huc10
         e.target.setStyle({
-            fillColor: "blue",
+            fillColor: "#db4cfa",
         });
 
         //add additional layers to map on selection and set layer order if present
@@ -450,6 +458,7 @@ function UncheckAll() {
 
 //============================================================================================
 //functions to set and update fill colors of HUC10s
+/*
 function getColor(d) {
     var colorArray = [
         '#efefef',
@@ -458,6 +467,23 @@ function getColor(d) {
         '#737373',
         '#303030',
         '#000000']
+    return d > 7 ? colorArray[5] :
+        d > 6 ? colorArray[4] :
+            d > 5 ? colorArray[3] :
+                d > 4 ? colorArray[2] :
+                    d > 3 ? colorArray[1] :
+                        d > 2 ? colorArray[0] :
+                            '#ffffff';
+}*/
+
+function getColor(d) {
+    var colorArray = [
+        '#eff3ff',
+        '#c6dbef',
+        '#9ecae1',
+        '#6baed6',
+        '#3182bd',
+        '#08519c']
     return d > 7 ? colorArray[5] :
         d > 6 ? colorArray[4] :
             d > 5 ? colorArray[3] :
